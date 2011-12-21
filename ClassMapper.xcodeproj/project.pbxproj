@@ -15,6 +15,12 @@
 		848C244A148BE9CA001859C8 /* libClassMapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 848C2432148BE9CA001859C8 /* libClassMapper.a */; };
 		848C2450148BE9CA001859C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 848C244E148BE9CA001859C8 /* InfoPlist.strings */; };
 		848C2453148BE9CA001859C8 /* ClassMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2452148BE9CA001859C8 /* ClassMapperTests.m */; };
+		848C245E148BEA37001859C8 /* MapperConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 848C245C148BEA37001859C8 /* MapperConfig.h */; };
+		848C245F148BEA37001859C8 /* MapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C245D148BEA37001859C8 /* MapperConfig.m */; };
+		848C2468148BEB19001859C8 /* Bar.h in Headers */ = {isa = PBXBuildFile; fileRef = 848C2464148BEB19001859C8 /* Bar.h */; };
+		848C2469148BEB19001859C8 /* Bar.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2465148BEB19001859C8 /* Bar.m */; };
+		848C246A148BEB19001859C8 /* Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 848C2466148BEB19001859C8 /* Foo.h */; };
+		848C246B148BEB19001859C8 /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2467148BEB19001859C8 /* Foo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,16 +36,22 @@
 /* Begin PBXFileReference section */
 		848C2432148BE9CA001859C8 /* libClassMapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libClassMapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C2435148BE9CA001859C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		848C2439148BE9CA001859C8 /* ClassMapper-Prefix.pch */ = {isa = PBXFileReference; path = "ClassMapper-Prefix.pch"; sourceTree = "<group>"; };
-		848C243A148BE9CA001859C8 /* ClassMapper.h */ = {isa = PBXFileReference; path = ClassMapper.h; sourceTree = "<group>"; };
+		848C2439148BE9CA001859C8 /* ClassMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassMapper-Prefix.pch"; sourceTree = "<group>"; };
+		848C243A148BE9CA001859C8 /* ClassMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMapper.h; sourceTree = "<group>"; };
 		848C243B148BE9CA001859C8 /* ClassMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMapper.m; sourceTree = "<group>"; };
 		848C2442148BE9CA001859C8 /* ClassMapperTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassMapperTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C2443148BE9CA001859C8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		848C2445148BE9CA001859C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		848C244D148BE9CA001859C8 /* ClassMapperTests-Info.plist */ = {isa = PBXFileReference; path = "ClassMapperTests-Info.plist"; sourceTree = "<group>"; };
+		848C244D148BE9CA001859C8 /* ClassMapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ClassMapperTests-Info.plist"; sourceTree = "<group>"; };
 		848C244F148BE9CA001859C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		848C2451148BE9CA001859C8 /* ClassMapperTests.h */ = {isa = PBXFileReference; path = ClassMapperTests.h; sourceTree = "<group>"; };
+		848C2451148BE9CA001859C8 /* ClassMapperTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMapperTests.h; sourceTree = "<group>"; };
 		848C2452148BE9CA001859C8 /* ClassMapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMapperTests.m; sourceTree = "<group>"; };
+		848C245C148BEA37001859C8 /* MapperConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapperConfig.h; sourceTree = "<group>"; };
+		848C245D148BEA37001859C8 /* MapperConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapperConfig.m; sourceTree = "<group>"; };
+		848C2464148BEB19001859C8 /* Bar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bar.h; sourceTree = "<group>"; };
+		848C2465148BEB19001859C8 /* Bar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bar.m; sourceTree = "<group>"; };
+		848C2466148BEB19001859C8 /* Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foo.h; sourceTree = "<group>"; };
+		848C2467148BEB19001859C8 /* Foo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +111,8 @@
 			children = (
 				848C243A148BE9CA001859C8 /* ClassMapper.h */,
 				848C243B148BE9CA001859C8 /* ClassMapper.m */,
+				848C245C148BEA37001859C8 /* MapperConfig.h */,
+				848C245D148BEA37001859C8 /* MapperConfig.m */,
 				848C2438148BE9CA001859C8 /* Supporting Files */,
 			);
 			path = ClassMapper;
@@ -115,6 +129,7 @@
 		848C244B148BE9CA001859C8 /* ClassMapperTests */ = {
 			isa = PBXGroup;
 			children = (
+				848C246C148BEB1F001859C8 /* Test Classes */,
 				848C2451148BE9CA001859C8 /* ClassMapperTests.h */,
 				848C2452148BE9CA001859C8 /* ClassMapperTests.m */,
 				848C244C148BE9CA001859C8 /* Supporting Files */,
@@ -131,6 +146,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		848C246C148BEB1F001859C8 /* Test Classes */ = {
+			isa = PBXGroup;
+			children = (
+				848C2464148BEB19001859C8 /* Bar.h */,
+				848C2465148BEB19001859C8 /* Bar.m */,
+				848C2466148BEB19001859C8 /* Foo.h */,
+				848C2467148BEB19001859C8 /* Foo.m */,
+			);
+			name = "Test Classes";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -138,6 +164,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848C245E148BEA37001859C8 /* MapperConfig.h in Headers */,
+				848C2468148BEB19001859C8 /* Bar.h in Headers */,
+				848C246A148BEB19001859C8 /* Foo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +268,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				848C243C148BE9CA001859C8 /* ClassMapper.m in Sources */,
+				848C245F148BEA37001859C8 /* MapperConfig.m in Sources */,
+				848C2469148BEB19001859C8 /* Bar.m in Sources */,
+				848C246B148BEB19001859C8 /* Foo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +419,7 @@
 				848C2458148BE9CA001859C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		848C2459148BE9CA001859C8 /* Build configuration list for PBXNativeTarget "ClassMapperTests" */ = {
 			isa = XCConfigurationList;
@@ -395,6 +428,7 @@
 				848C245B148BE9CA001859C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

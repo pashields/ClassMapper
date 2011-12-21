@@ -7,7 +7,10 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-
+#import "ClassMapper.h"
+#import "MapperConfig.h"
+#import "Foo.h"
+#import "Bar.h"
 @interface ClassMapperTests : SenTestCase
 
 @end
