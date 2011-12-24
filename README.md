@@ -6,6 +6,7 @@ API
 ---
 ###ClassMapper
 The ClassMapper object contains two primary methods:
+
 ``` objective-c
 + (NSDictionary*)objToDict:(id)object;
 ```
@@ -17,6 +18,7 @@ The +objToDict method behaves as expected. Arrays and Nested objects are handled
 The +dict: toClass: method is a little bit more subtle. As long as the given class has no nesting, the mapper will handle cocoa objects and arrays without additional input. 
 
 However, if we have nested objects à la
+
 ``` objective-c
 @interface Foo : NSObject
 @property (nonatomic, retain)NSString *str;
@@ -29,11 +31,13 @@ We need to tell ClassMapper that when it encounters the NSDictionary key @"foo" 
 
 ###MapperConfig
 To create the mapping we use the following method:
+
 ``` objective-c
 - (void)mapKey:(NSString*)key toClass:(Class)class;
 ```
 
 To continue with the example from above, we would add a mapping between the "foo" key and the Foo class.
+
 ``` objective-c
 [[MapperConfig sharedInstance] mapKey:@"foo" toClass:[Foo class]];
 ```
