@@ -39,5 +39,6 @@
 + (NSArray*)objsToDictArray:(NSArray*)objs;
 
 #pragma mark private
-+ (id)_dict:(NSDictionary *)dict toMappedName:(NSString*)key;
++ (Class)_classFromKey:(NSString*)key;
++ (Class)_classFromAttribute:(NSString*)attr;
 @end

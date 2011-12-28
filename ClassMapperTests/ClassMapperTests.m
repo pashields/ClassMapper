@@ -56,6 +56,21 @@
                          [foo.anArray lastObject]);
 }
 
+- (void)testDictToObjComplexUnMappedArray {
+    NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
+    NSMutableArray *array = [NSMutableArray arrayWithObject:subObj];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:array forKey:@"anArray"];
+    
+    Foo *foo = [ClassMapper dict:dict toClass:[Foo class]];
+    
+    int count = [foo.anArray count];
+    STAssertTrue(count > 0, @"There are no items in the array: %@", foo.anArray);
+    NSDictionary *unmapped = [foo.anArray lastObject];
+    STAssertEqualObjects([unmapped objectForKey:@"aString"], @"MOTORHEAD", 
+                         @"Contents of the array were not deserialized properly: %@", 
+                         [foo.anArray lastObject]);
+}
+
 - (void)testDictToObjNestedObj {
     NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:subObj forKey:@"aBar"];
@@ -117,8 +132,8 @@
                          foo.aNumber, fooCopy.aNumber);
     
     // Array Check
-    STAssertEqualObjects([foo.anArray class], [fooCopy.anArray class], @"Array copy failed. original: %@, copy: %@", 
-                         foo.anArray, fooCopy.anArray);
+    STAssertTrue([fooCopy.anArray isKindOfClass:[NSArray class]], @"Array copy failed. original: %@, copy: %@", 
+                 foo.anArray, fooCopy.anArray);
     STAssertTrue([foo.anArray count] == [fooCopy.anArray count], @"Array copy produced mismatched lengths");
     for (int i=0; i<[foo.anArray count]; i++) {
         id ori = [foo.anArray objectAtIndex:i];
@@ -162,8 +177,8 @@
                          foo.aNumber, fooCopy.aNumber);
     
     // Array Check
-    STAssertEqualObjects([foo.anArray class], [fooCopy.anArray class], @"Array copy failed. original: %@, copy: %@", 
-                         foo.anArray, fooCopy.anArray);
+    STAssertTrue([fooCopy.anArray isKindOfClass:[NSArray class]], @"Array copy failed. original: %@, copy: %@", 
+                 foo.anArray, fooCopy.anArray);
     STAssertTrue([foo.anArray count] == [fooCopy.anArray count], @"Array copy produced mismatched lengths");
     for (int i=0; i<[foo.anArray count]; i++) {
         id ori = [foo.anArray objectAtIndex:i];

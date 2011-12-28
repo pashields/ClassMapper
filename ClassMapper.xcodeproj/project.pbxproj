@@ -52,6 +52,7 @@
 		848C2465148BEB19001859C8 /* Bar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bar.m; sourceTree = "<group>"; };
 		848C2466148BEB19001859C8 /* Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foo.h; sourceTree = "<group>"; };
 		848C2467148BEB19001859C8 /* Foo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
+		DA0690F914AAB52E006E4DFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +85,7 @@
 				848C244B148BE9CA001859C8 /* ClassMapperTests */,
 				848C2434148BE9CA001859C8 /* Frameworks */,
 				848C2433148BE9CA001859C8 /* Products */,
+				DA0690F914AAB52E006E4DFF /* README.md */,
 			);
 			sourceTree = "<group>";
 		};

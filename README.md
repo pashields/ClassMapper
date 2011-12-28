@@ -15,19 +15,26 @@ The +objToDict method behaves as expected. Arrays and Nested objects are handled
 ``` objective-c
 + (id)dict:(NSDictionary*)dict toClass:(Class)classType;
 ```
-The +dict: toClass: method is a little bit more subtle. As long as the given class has no nesting, the mapper will handle cocoa objects and arrays without additional input. 
+The +dict: toClass: method is a little bit more subtle. The mapper will work as expected, except when the class contains an NSArray containing Objects that have been converted into NSDictionaries and should be automatically converted into instances of a particular class. 
 
-However, if we have nested objects à la
+However, if we have an array à la
 
 ``` objective-c
 @interface Foo : NSObject
 @property (nonatomic, retain)NSString *str;
 @end
 @interface Bar : NSObject
-@property (nonatomic, retain)Foo *foo;
+@property (nonatomic, retain)NSArray *foos;
 @end
+/*
+ * Bar *bar = [Bar new];
+ * Foo *fooA = [Foo new];
+ * [bar.foos addObject:fooA];
+ * Foo *fooB = [Foo new];
+ * [bar.foos addObject:fooB];
+ */
 ```
-We need to tell ClassMapper that when it encounters the NSDictionary key @"foo" with a value that is an NSDictionary or NSArray, it should deserialize into a Foo object. To do this, we use a singleton MapperConfig object. 
+We need to tell ClassMapper that when it encounters the NSDictionary key @"foos" with a value that is an NSArray, it should deserialize into a Foo object. To do this, we use a singleton MapperConfig object. 
 
 ###MapperConfig
 To create the mapping we use the following method:
@@ -36,10 +43,10 @@ To create the mapping we use the following method:
 - (void)mapKey:(NSString*)key toClass:(Class)class;
 ```
 
-To continue with the example from above, we would add a mapping between the "foo" key and the Foo class.
+To continue with the example from above, we would add a mapping between the "foos" key and the Foo class.
 
 ``` objective-c
-[[MapperConfig sharedInstance] mapKey:@"foo" toClass:[Foo class]];
+[[MapperConfig sharedInstance] mapKey:@"foos" toClass:[Foo class]];
 ```
 Status
 ------
@@ -47,7 +54,8 @@ So far this is a just a little toy project of mine. The long term goal is to bui
 
 * Add support to work in non-ARC projects, or at least instructions on how to deal with this.
 * More thorough search for edge cases in the KVC system that we should be watching out for. Adding test cases to cover these new edge cases.
-* Figuring out a better solution to the nested objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
+* Figuring out a better solution to the arrays of serialized objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
+* Additional support for non-pointer properties.
 * Possibly refining the API to optimize the use of ClassMapper with other libraries. This is not inherently useful on it's own, but combined with a serialization mechanism (JSON, XML, ...) and good networking library, magic could happen. In particular, we need to prepare the classes to be used in a multi-threaded environment with GCD.
 
 License
