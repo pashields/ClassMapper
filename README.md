@@ -26,13 +26,12 @@ However, if we have an array à la
 @interface Bar : NSObject
 @property (nonatomic, retain)NSArray *foos;
 @end
-/*
- * Bar *bar = [Bar new];
- * Foo *fooA = [Foo new];
- * [bar.foos addObject:fooA];
- * Foo *fooB = [Foo new];
- * [bar.foos addObject:fooB];
- */
+/* -------------------------- */
+Bar *bar = [Bar new];
+Foo *fooA = [Foo new];
+[bar.foos addObject:fooA];
+Foo *fooB = [Foo new];
+[bar.foos addObject:fooB];
 ```
 We need to tell ClassMapper that when it encounters the NSDictionary key @"foos" with a value that is an NSArray, it should deserialize into a Foo object. To do this, we use a singleton MapperConfig object. 
 
