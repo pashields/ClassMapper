@@ -65,23 +65,8 @@
 }
 
 #pragma mark serialize
-+ (NSDictionary*)objToDict:(id)object {
-    unsigned int outCount;
-    objc_property_t *properties = class_copyPropertyList([object class], &outCount);
-    NSMutableSet *propSet = [NSMutableSet set];
-    for (int i=0; i<outCount; i++) {
-        objc_property_t property = properties[i];
-        [propSet addObject:[NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding]];
-    }
-    
-    return [object dictionaryWithValuesForKeys:[propSet allObjects]];
-}
-+ (NSArray*)objsToDictArray:(NSArray*)objs {
-    NSMutableArray *dicts = [NSMutableArray arrayWithCapacity:[objs count]];
-    for (id obj in objs) {
-        [dicts addObject:[ClassMapper objToDict:obj]];
-    }
-    return dicts;
++ (id)serialize:(id<Serializable>)object {
+    return [object _cm_serialize];
 }
 
 #pragma mark private

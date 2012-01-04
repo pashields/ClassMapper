@@ -106,6 +106,14 @@
 }
 
 #pragma mark serialization
+- (void)testSerializeString {
+    NSString *foo = @"foo";
+    STAssertEquals(foo, [foo _cm_serialize], @"Serializing strings not working");
+}
+- (void)testSerializeNumber {
+    NSNumber *foo = [NSNumber numberWithInt:1];
+    STAssertEquals(foo, [foo _cm_serialize], @"Serializing numbers not working");
+}
 - (void)testSerializeDict {
     Foo *foo = [Foo new];
     foo.aString = @"Yob is wicked heavy, dude";
@@ -117,7 +125,7 @@
     
     foo.aBar = bar;
     
-    NSDictionary *dict = [ClassMapper objToDict:foo];
+    NSDictionary *dict = [ClassMapper serialize:foo];
     STAssertNotNil(dict, @"Serialization failed");
     
     [[MapperConfig sharedInstance] mapKey:@"aBar" toClass:[Bar class]];
@@ -161,7 +169,7 @@
     
     NSArray *objs = [NSArray arrayWithObject:foo];
     
-    NSArray *dictArray = [ClassMapper objsToDictArray:objs];
+    NSArray *dictArray = [ClassMapper serialize:objs];
     STAssertNotNil(dictArray, @"Serialization failed");
     STAssertTrue([dictArray count] == 1, @"Serialized array has wrong lenth: %@", dictArray);
     

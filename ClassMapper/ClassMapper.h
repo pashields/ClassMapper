@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MapperConfig.h"
+/* Reflection */
 #import <Foundation/NSObjCRuntime.h>
 #import <objc/runtime.h>
-#import "MapperConfig.h"
+/* Categories */
+#import "NSString+ClassMapper.h"
+#import "NSNumber+ClassMapper.h"
+#import "NSArray+ClassMapper.h"
+#import "NSDictionary+ClassMapper.h"
+#import "NSObject+ClassMapper.h"
 
 @interface ClassMapper : NSObject
 /*
@@ -29,14 +36,9 @@
 + (NSArray*)dictArray:(NSArray*)dicts toClass:(Class)classType;
 /*
  * Converts an object to a JSON-compatible dictionary. Requires the
- * object's class to follow KVC conventions.
+ * object to implement the serializable protocol, or be KVC compliant.
  */
-+ (NSDictionary*)objToDict:(id)object;
-/*
- * Converts an arrays of objects to an array of JSON-compatible
- * dictionaries. Requires the objects to follow KVC conventions.
- */
-+ (NSArray*)objsToDictArray:(NSArray*)objs;
++ (id)serialize:(id<Serializable>)obj;
 
 #pragma mark private
 + (Class)_classFromKey:(NSString*)key;
