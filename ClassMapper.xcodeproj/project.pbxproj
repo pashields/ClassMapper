@@ -261,6 +261,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Patrick Shields";
 			};
 			buildConfigurationList = 848C242C148BE9CA001859C8 /* Build configuration list for PBXProject "ClassMapper" */;
 			compatibilityVersion = "Xcode 3.2";

@@ -3,7 +3,7 @@
 //  ClassMapperTests
 //
 //  Created by Patrick Shields on 12/4/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Patrick Shields. All rights reserved.
 //
 
 #import <SenTestingKit/SenTestingKit.h>
