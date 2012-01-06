@@ -11,6 +11,8 @@
 #import "MapperConfig.h"
 #import "Foo.h"
 #import "Bar.h"
+#import "Zip.h"
+#import "ArrayHolder.h"
 @interface ClassMapperTests : SenTestCase
 
 @end

@@ -7,6 +7,10 @@
 //
 
 #import "ClassMapper.h"
+@interface ClassMapper ()
++ (NSArray*)handleArray:(NSArray*)val withKey:(NSString*)key;
++ (id)handleDictionary:(NSDictionary*)val withAttributeClass:(Class)attrClass andKeyClass:(Class)keyClass;
+@end
 
 @implementation ClassMapper
 #pragma mark deserialize
@@ -31,31 +35,68 @@
         }
         id val = [dict objectForKey:key];
         /* Key is an array, recursive search for nested objects */
-        if ([val isKindOfClass:[NSArray class]]) {
-            /* Create a new array so as not to mutate the obj */
-            NSMutableArray *deserialized = [NSMutableArray arrayWithCapacity:[val count]];
-            [val enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                /* Use key->class mapping to attempt to resolve type */
-                Class arrayObjClass = [ClassMapper _classFromKey:key];
-                if ([obj isKindOfClass:[NSDictionary class]] &&
-                    (arrayObjClass != [NSDictionary class])) {
-                    /* Array is full of a resolvable type based on key->class mapping */
-                    [deserialized addObject:[ClassMapper dict:obj toClass:arrayObjClass]];
-                } else {
-                    /* Type of objs in array cannot be resolved, pass along the dictionaries */
-                    [deserialized addObject:obj];
-                }
-            }];
-            val = deserialized;
+        if ([ClassMapper _class:[val class] isKindOf:[NSArray class]]) {
+            val = [ClassMapper handleArray:val withKey:key];
         } 
-        /* Key is a subobject */
-        else if ([val isKindOfClass:[NSDictionary class]]) {
-            val = [ClassMapper dict:val toClass:[ClassMapper _classFromAttribute:[propToAttr objectForKey:key]]];
+        /* Key is a subobject or an NSDictionary. Don't care as both are KVC. */
+        else if ([ClassMapper _class:[val class] isKindOf:[NSDictionary class]]) {
+            /* The class of the property */
+            Class attributeClass = [ClassMapper _classFromAttribute:[propToAttr objectForKey:key]];
+            Class keyClass = [ClassMapper _classFromKey:key];
+            val = [ClassMapper handleDictionary:val withAttributeClass:attributeClass andKeyClass:keyClass];
         }
         [obj setValue:val forKey:key];
     }
     return obj;
 }
+
++ (NSArray*)handleArray:(NSArray*)val withKey:(NSString*)key {
+    /* Create a new array so as not to mutate the obj */
+    NSMutableArray *deserialized = [NSMutableArray arrayWithCapacity:[val count]];
+    [val enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        /* Use key->class mapping to attempt to resolve type */
+        Class arrayObjClass = [ClassMapper _classFromKey:key];
+        if ([ClassMapper _class:[obj class] isKindOf:[NSDictionary class]]) {
+            if (arrayObjClass && (arrayObjClass != [NSDictionary class])) {
+                /* Array is full of a resolvable type based on key->class mapping */
+                [deserialized addObject:[ClassMapper dict:obj toClass:arrayObjClass]];
+            } else {
+                [deserialized addObject:[ClassMapper handleDictionary:obj withAttributeClass:[NSDictionary class] andKeyClass:nil]];
+            }
+        } else if ([ClassMapper _class:[obj class] isKindOf:[NSDictionary class]]) {
+            [deserialized addObject:[ClassMapper handleDictionary:obj withAttributeClass:arrayObjClass andKeyClass:nil]];
+        } else {
+            /* Type of objs in array cannot be resolved, pass along the dictionaries */
+            [deserialized addObject:obj];
+        }
+    }];
+    return deserialized;
+}
+
++ (id)handleDictionary:(NSDictionary*)val withAttributeClass:(Class)attrClass andKeyClass:(Class)keyClass {
+    Class winnerClass = attrClass ? attrClass : keyClass;
+    if (winnerClass && ![ClassMapper _class:winnerClass isKindOf:[NSDictionary class]]) {
+        return [ClassMapper dict:val toClass:winnerClass];
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:[val count]];
+    [val enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        Class classOfKey = [ClassMapper _classFromKey:key];
+        if ([ClassMapper _class:[obj class] isKindOf:[NSDictionary class]]) {
+            [dict setValue:[ClassMapper handleDictionary:obj 
+                                      withAttributeClass:nil 
+                                             andKeyClass:classOfKey]
+                            forKey:key];
+        } else if ([ClassMapper _class:[obj class] isKindOf:[NSArray class]]) {
+            [dict setValue:[ClassMapper handleArray:obj withKey:key] forKey:key];
+        } else {
+            [dict setValue:obj forKey:key];
+        }
+    }];
+    
+    return dict;
+}
+
 + (NSArray*)dictArray:(NSArray*)dicts toClass:(Class)classType {
     NSMutableArray *objs = [NSMutableArray arrayWithCapacity:[dicts count]];
     for (NSDictionary *dict in dicts) {
@@ -84,6 +125,18 @@
     
     return [config.mappings objectForKey:key] != nil ? 
            [config.mappings objectForKey:key] :
-           [NSDictionary class];
+           nil;
+}
++ (BOOL)_class:(Class)desc isKindOf:(Class)parent {
+    Class current = desc;
+    Class last = current;
+    do {
+        if (current == parent) {
+            return true;
+        }
+        last = current;
+        current = class_getSuperclass(current);
+    } while (last != current);
+    return FALSE;
 }
 @end

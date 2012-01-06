@@ -16,6 +16,7 @@
 
 #pragma mark dict to class
 - (void)testDictToSimpleObj {
+    /* {"aString":"hi", "aNumber":10} -> Foo */
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"hi", @"aString", [NSNumber numberWithInt:10], 
                           @"aNumber", nil];
     Foo *foo = [ClassMapper dict:dict toClass:[Foo class]];
@@ -25,6 +26,7 @@
 }
 
 - (void)testFailDictToSimpleObj {
+    /* {"astring":"hi", "anumber":10} -> Foo. Throw exception for bad keys */
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"hi", @"astring", 
                           [NSNumber numberWithInt:10], @"anumber", nil];
     STAssertThrows([ClassMapper dict:dict toClass:[Foo class]], 
@@ -32,6 +34,7 @@
 }
 
 - (void)testDictToObjSimpleArray {
+    /* {"anArray":[" "]} -> Foo */
     NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSArray arrayWithObject:@" "] forKey:@"anArray"];
     Foo *foo = [ClassMapper dict:dict toClass:[Foo class]];
     int count = [foo.anArray count];
@@ -41,6 +44,7 @@
 }
 
 - (void)testDictToObjComplexArray {
+    /* {"anArray":[ {"aString":"MOTORHEAD"} ]} -> Foo, Foo.anArray = Bar */
     NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
     NSMutableArray *array = [NSMutableArray arrayWithObject:subObj];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:array forKey:@"anArray"];
@@ -57,6 +61,7 @@
 }
 
 - (void)testDictToObjComplexUnMappedArray {
+    /* {"anArray":[ {"aString":"MOTORHEAD"} ]} -> Foo, Foo.anArray = [ {"aString":"MOTORHEAD"} ] */
     NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
     NSMutableArray *array = [NSMutableArray arrayWithObject:subObj];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:array forKey:@"anArray"];
@@ -72,6 +77,7 @@
 }
 
 - (void)testDictToObjNestedObj {
+    /* {"aBar":{"aString":"MOTORHEAD"}} -> Foo, Foo.aBar = Bar */
     NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:subObj forKey:@"aBar"];
     
@@ -84,8 +90,38 @@
     STAssertEqualObjects(bar.aString, @"MOTORHEAD", @"Nested obj not deserialized properly: %@", bar);
 }
 
+- (void)testDictToObjWithDict {
+    /* {"aDict":{"bar":"foo", "nums":1} } -> Zip */
+    NSDictionary *aDict = [NSDictionary dictionaryWithObjectsAndKeys:@"foo", @"bar", 
+                           [NSNumber numberWithInt:1], @"nums", nil];
+    NSDictionary *zipDict = [NSDictionary dictionaryWithObject:aDict forKey:@"aDict"];
+    
+    Zip *zip = [ClassMapper dict:zipDict toClass:[Zip class]];
+    
+    STAssertNotNil(zip.aDict, @"Obj element not deseriailized, is nil: %@", zipDict);
+    STAssertEquals([[aDict allKeys] count], [[zip.aDict allKeys] count], 
+                   @"Deserialized dictionaries have different key sets. Ori: %@, post: %@", aDict, zip.aDict);
+}
+
+- (void)testDictToObjWithDictArray {
+    /* {"anArray":[ {"aString":"MOTORHEAD"} ]} -> ArrayHolder, ArrayHolder.anArray = [ {"aString":"MOTORHEAD"} ] */
+    NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
+    NSMutableArray *array = [NSMutableArray arrayWithObject:subObj];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:array forKey:@"anArray"];
+    
+    Foo *foo = [ClassMapper dict:dict toClass:[Foo class]];
+    
+    int count = [foo.anArray count];
+    STAssertTrue(count > 0, @"There are no items in the array: %@", foo.anArray);
+    NSDictionary *dictionary = [foo.anArray lastObject];
+    STAssertEqualObjects([dictionary objectForKey:@"aString"], @"MOTORHEAD", 
+                         @"Contents of the array were not deserialized properly: %@", 
+                         [foo.anArray lastObject]);
+}
+
 #pragma mark array to classarray
 - (void)testArrayToArray {
+    /* [{"aString":"MOTORHEAD"}, {"aString":"BLACK SABBATH"}] -> [Bar, Bar] */
     NSDictionary *dict1 = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
     NSDictionary *dict2 = [NSDictionary dictionaryWithObject:@"BLACK SABBATH" forKey:@"aString"];
     NSArray *ray = [NSArray arrayWithObjects:dict1, dict2, nil];
@@ -200,5 +236,15 @@
                          [foo.aBar class], [fooCopy.aBar class]);
     STAssertEqualObjects(foo.aBar.aString, fooCopy.aBar.aString, @"Nested objs do not match. original: %@, copy: %@", 
                          foo.aBar.aString, fooCopy.aBar.aString);
+}
+
+#pragma mark runtime tests
+- (void)testRuntime {
+    STAssertTrue([ClassMapper _class:[NSMutableArray class] isKindOf:[NSArray class]], 
+                 @"NSMutableArray is not considered a subclass of NSArray");
+    STAssertFalse([ClassMapper _class:[NSArray class] isKindOf:[NSMutableArray class]], 
+                 @"NSArray is considered a subclass of NSMutableArray");
+    STAssertTrue([ClassMapper _class:[NSMutableArray class] isKindOf:[NSObject class]], 
+                 @"NSMutableArray is not considered a subclass of NSObject");
 }
 @end
