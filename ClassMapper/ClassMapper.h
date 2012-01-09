@@ -39,9 +39,4 @@
  * object to implement the serializable protocol, or be KVC compliant.
  */
 + (id)serialize:(id<Serializable>)obj;
-
-#pragma mark private
-+ (Class)_classFromKey:(NSString*)key;
-+ (Class)_classFromAttribute:(NSString*)attr;
-+ (BOOL)_class:(Class)desc isKindOf:(Class)parent;
 @end

@@ -240,11 +240,11 @@
 
 #pragma mark runtime tests
 - (void)testRuntime {
-    STAssertTrue([ClassMapper _class:[NSMutableArray class] isKindOf:[NSArray class]], 
+    STAssertTrue([ClassMapper descClass:[NSMutableArray class] isKindOf:[NSArray class]], 
                  @"NSMutableArray is not considered a subclass of NSArray");
-    STAssertFalse([ClassMapper _class:[NSArray class] isKindOf:[NSMutableArray class]], 
+    STAssertFalse([ClassMapper descClass:[NSArray class] isKindOf:[NSMutableArray class]], 
                  @"NSArray is considered a subclass of NSMutableArray");
-    STAssertTrue([ClassMapper _class:[NSMutableArray class] isKindOf:[NSObject class]], 
+    STAssertTrue([ClassMapper descClass:[NSMutableArray class] isKindOf:[NSObject class]], 
                  @"NSMutableArray is not considered a subclass of NSObject");
 }
 @end
