@@ -49,20 +49,18 @@ To continue with the example from above, we would add a mapping between the "foo
 ```
 Usage
 ------
-You can easily add ClassMapper to your project either by source or using a static library. It is important to note two things:
+ClassMapper officially supports [CocoaPods](https://github.com/CocoaPods/CocoaPods). We aren't hosted there yet, but once we reach 0.0.1, we can submit.
 
-* Only ARC projects are supported currently.
+You can also add ClassMapper manually, either as source or (preferably) a static library. It is important to note two things:
+
+* ClassMapper uses ARC, so if you don't use ARC, your best option is to include as a static library.
 * If you are using the static library, the -ObjC flag must be added to "Other Linker Flags" in your xcodeproj.  See [this apple Q&A](http://developer.apple.com/library/mac/#qa/qa1490/_index.html) about categories to better understand why we need this linker flag.
 
 Status
 ------
-So far this is a just a little toy project of mine. The long term goal is to build myself a little stack of libraries that can be used to interact painlessly with RESTful APIs. I hope to write as few of those libraries as possible. Consider this current version unstable and barely tested. The code is short and simple though, so you can evaluate it on your own. Future work is:
+So far this is a just a little toy project of mine. The long term goal is to build myself a little stack of libraries that can be used to interact painlessly with RESTful APIs. I hope to write as few of those libraries as possible. Consider this current version unstable and barely tested. The code is short and simple though, so you can evaluate it on your own.
 
-* Add support to work in non-ARC projects, or at least instructions on how to deal with this.
-* More thorough search for edge cases in the KVC system that we should be watching out for. Adding test cases to cover these new edge cases.
-* Figuring out a better solution to the arrays of serialized objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
-* Bundle additional categories.
-* Possibly refining the API to optimize the use of ClassMapper with other libraries. This is not inherently useful on it's own, but combined with a serialization mechanism (JSON, XML, ...) and good networking library, magic could happen. In particular, we need to prepare the classes to be used in a multi-threaded environment with GCD.
+For more info, you can look at ClassMapper.org (emacs org-mode).
 
 License
 -------
