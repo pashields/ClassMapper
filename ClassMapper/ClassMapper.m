@@ -29,6 +29,9 @@
         [propToAttr setValue:propAttr forKey:propName];
     }
     
+    /* Run preproc. Does nothing by default */
+    dict = [MapperConfig sharedInstance].preProcBlock(dict);
+    
     for (NSString *key in [dict allKeys]) {
         if (![[propToAttr allKeys] containsObject:key]) {
             [NSException raise:@"Property does not exist" 

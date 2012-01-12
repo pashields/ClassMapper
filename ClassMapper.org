@@ -2,6 +2,7 @@
 ** DONE Evaluate last checkin, push if complete.
 ** DONE Push new documentation.
 ** DONE Move private methods into anonymous category.
+** DONE Add ability to write a global preproc for dict: toClass:.
 ** TODO Add custom deserialization routines for mutability issues at least.
 ** TODO Figure out a better solution to the arrays of serialized objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
 

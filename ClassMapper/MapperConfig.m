@@ -7,12 +7,16 @@
 //
 
 #import "MapperConfig.h"
+
+#define DEFAULT_PREPROC ^(NSDictionary* dict) {return dict;}
+
 @interface MapperConfig ()
 @property(nonatomic, retain)NSMutableDictionary *nameMappings;
 @end
 
 @implementation MapperConfig
 @synthesize nameMappings=mappings_;
+@synthesize preProcBlock=preProcBlock_;
 
 #pragma mark singleton
 + (MapperConfig*)sharedInstance {
@@ -29,6 +33,7 @@
     self = [super init];
     if (self) {
         self.nameMappings = [NSMutableDictionary dictionary];
+        self.preProcBlock = DEFAULT_PREPROC;
     }
     
     return self;
@@ -39,7 +44,8 @@
 - (NSDictionary*)mappings {
     return self.nameMappings;
 }
-- (void)clearMappings {
+- (void)clearConfig {
     self.nameMappings = [NSMutableDictionary dictionary];
+    self.preProcBlock = DEFAULT_PREPROC;
 }
 @end

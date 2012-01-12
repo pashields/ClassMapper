@@ -8,9 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
+
 @interface MapperConfig : NSObject {
     NSMutableDictionary *mappings_;
+    PreProcBlock preProcBlock_;
 }
+/*
+ * A block of code used to strip out transmission metadata
+ * from any dict that might be passed. This is mostly a
+ * conveinance for when you might want to hook ClassMapper
+ * into a networking library setup.
+ */
+@property(nonatomic,copy)PreProcBlock preProcBlock;
 /*
  * Returns an instance of the mapper config that will
  * be used globaly.
@@ -28,7 +38,7 @@
  */
 - (NSDictionary*)mappings;
 /*
- * Remove all currently set mappings
+ * Clear any mappings or blocks.
  */
-- (void)clearMappings;
+- (void)clearConfig;
 @end

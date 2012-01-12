@@ -11,7 +11,7 @@
 @implementation ClassMapperTests
 - (void)tearDown {
     [super tearDown];
-    [[MapperConfig sharedInstance] clearMappings];
+    [[MapperConfig sharedInstance] clearConfig];
 }
 
 #pragma mark dict to class
@@ -246,5 +246,24 @@
                  @"NSArray is considered a subclass of NSMutableArray");
     STAssertTrue([ClassMapper descClass:[NSMutableArray class] isKindOf:[NSObject class]], 
                  @"NSMutableArray is not considered a subclass of NSObject");
+}
+
+#pragma mark preproc test
+- (void)testPreProc {
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSNumber numberWithInt:200], 
+                          @"status",
+                          [NSDictionary dictionaryWithObjectsAndKeys:@"Phil Lynott Rules", @"aString",nil], 
+                          @"result", nil];
+    
+    [MapperConfig sharedInstance].preProcBlock = ^ (NSDictionary* dict) {
+        return [dict objectForKey:@"result"];
+    };
+    
+    Bar *bar = [ClassMapper dict:dict toClass:[Bar class]];
+    STAssertNotNil(bar, @"Pre proc mapping failed, returned nil");
+    STAssertTrue([@"Phil Lynott Rules" isEqualToString:bar.aString], 
+                 @"Deserialized obj should tell you about greatest rock and roll frontman of all time, instead:%@", 
+                 bar.aString);
 }
 @end
