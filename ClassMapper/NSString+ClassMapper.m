@@ -10,6 +10,6 @@
 
 @implementation NSString (ClassMapper)
 - (id)_cm_serialize {
-    return self;
+    return [self copy];
 }
 @end

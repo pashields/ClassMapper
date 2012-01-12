@@ -46,6 +46,10 @@
             Class attributeClass = [ClassMapper classFromAttribute:[propToAttr objectForKey:key]];
             Class keyClass = [ClassMapper classFromKey:key];
             val = [ClassMapper handleDictionary:val withAttributeClass:attributeClass andKeyClass:keyClass];
+        } 
+        /* Otherwise make a copy, in case this is mutable */
+        else {
+            val = [val copy];
         }
         [obj setValue:val forKey:key];
     }
