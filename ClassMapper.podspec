@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.platform = :ios
 
-  s.source_files = 'ClassMapper'
+  s.source_files = ['ClassMapper/*.{h,m}', 'ClassMapper/Categories/*.{h,m}']
 
   s.requires_arc = true
 end
