@@ -18,6 +18,8 @@
 #import "NSDictionary+ClassMapper.h"
 #import "NSObject+ClassMapper.h"
 
+#define LOG_KEY_MISSING NO
+
 @interface ClassMapper : NSObject
 /*
  * Converts a dictionary into an instance of a particular class.
