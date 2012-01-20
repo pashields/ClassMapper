@@ -25,14 +25,6 @@
                          foo.aNumber);
 }
 
-- (void)testFailDictToSimpleObj {
-    /* {"astring":"hi", "anumber":10} -> Foo. Throw exception for bad keys */
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"hi", @"astring", 
-                          [NSNumber numberWithInt:10], @"anumber", nil];
-    STAssertThrows([ClassMapper dict:dict toClass:[Foo class]], 
-                   @"Dict contains non-existant props, but did not throw exception: %@", dict);
-}
-
 - (void)testDictToObjSimpleArray {
     /* {"anArray":[" "]} -> Foo */
     NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSArray arrayWithObject:@" "] forKey:@"anArray"];
@@ -119,6 +111,15 @@
                          [foo.anArray lastObject]);
 }
 
+- (void)testDictWithExtraDictToObj {
+    /* {"aDict":{"key":"stuff"}, "aString":"foo"} -> Bar, bar.aString = @"foo" */
+    NSDictionary *wontBeDeserialized = [NSDictionary dictionaryWithObject:@"stuff" forKey:@"key"];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:wontBeDeserialized, @"aDict",
+                          @"foo", @"aString", nil];
+    
+    Bar *bar = [ClassMapper dict:dict toClass:[Bar class]];
+    STAssertEquals(@"foo", bar.aString, @"Dict not properly deserialized: %@", dict);
+}
 #pragma mark array to classarray
 - (void)testArrayToArray {
     /* [{"aString":"MOTORHEAD"}, {"aString":"BLACK SABBATH"}] -> [Bar, Bar] */

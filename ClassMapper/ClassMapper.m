@@ -33,15 +33,9 @@
     dict = [MapperConfig sharedInstance].preProcBlock(dict);
     
     /* Note any missing keys */
+    NSArray *dictKeys = [dict allKeys];
+    NSArray *classKeys = [propToAttr allKeys];
     if (LOG_KEY_MISSING) {
-        NSArray *dictKeys = [dict allKeys];
-        NSArray *classKeys = [propToAttr allKeys];
-        for (NSString *key in dictKeys) {
-            if (![classKeys containsObject:key]) {
-                NSLog(@"Property %@ does not exist in class %@, but is found in source object %@",
-                      key, classType, dict);
-            }
-        }
         for (NSString *key in classKeys) {
             if (![dictKeys containsObject:key]) {
                 NSLog(@"Property %@ does not exist in dictionary %@, but is found in class %@",
@@ -51,6 +45,14 @@
     }
     
     for (NSString *key in [dict allKeys]) {
+        /* Check if key is in source object only */
+        if (![classKeys containsObject:key]) {
+            if (LOG_KEY_MISSING) {
+                NSLog(@"Property %@ does not exist in class %@, but is found in source object %@",
+                      key, classType, dict);
+            }
+            continue;
+        }
         id val = [dict objectForKey:key];
         /* Key is an array, recursive search for nested objects */
         if ([ClassMapper descClass:[val class] isKindOf:[NSArray class]]) {
