@@ -20,8 +20,10 @@
     
     NSMutableDictionary *serialized = [NSMutableDictionary dictionaryWithCapacity:outCount];
     
-    for (NSString *propName in propSet) {
+    /* propName is strong in case we need to change it */
+    for (__strong NSString *propName in propSet) {
         id<Serializable> prop = [self valueForKey:propName];
+        propName = [[MapperConfig sharedInstance] _trueKey:propName];
         [serialized setValue:[prop _cm_serialize] forKey:propName];
     }
     

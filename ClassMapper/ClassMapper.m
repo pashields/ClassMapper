@@ -44,7 +44,13 @@
         }
     }
     
-    for (NSString *key in [dict allKeys]) {
+    /* key is strong so we can swap it if need be */
+    for (__strong NSString *key in [dict allKeys]) {
+        /* The value */
+        id val = [dict objectForKey:key];
+        /* Update the key according to config, might swap */
+        key = [[MapperConfig sharedInstance] _trueKey:key];
+        
         /* Check if key is in source object only */
         if (![classKeys containsObject:key]) {
             if (LOG_KEY_MISSING) {
@@ -53,7 +59,7 @@
             }
             continue;
         }
-        id val = [dict objectForKey:key];
+        
         /* Key is an array, recursive search for nested objects */
         if ([ClassMapper descClass:[val class] isKindOf:[NSArray class]]) {
             val = [ClassMapper handleArray:val withKey:key];
@@ -147,8 +153,8 @@
 + (Class)classFromKey:(NSString*)key {
     MapperConfig *config = [MapperConfig sharedInstance];
     
-    return [config.mappings objectForKey:key] != nil ? 
-           [config.mappings objectForKey:key] :
+    return [config.classMappings objectForKey:key] != nil ? 
+           [config.classMappings objectForKey:key] :
            nil;
 }
 + (BOOL)descClass:(Class)desc isKindOf:(Class)parent {

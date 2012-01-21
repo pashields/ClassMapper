@@ -263,8 +263,20 @@
     
     Bar *bar = [ClassMapper dict:dict toClass:[Bar class]];
     STAssertNotNil(bar, @"Pre proc mapping failed, returned nil");
-    STAssertTrue([@"Phil Lynott Rules" isEqualToString:bar.aString], 
+    STAssertEquals(@"Phil Lynott Rules", bar.aString, 
                  @"Deserialized obj should tell you about greatest rock and roll frontman of all time, instead:%@", 
                  bar.aString);
+}
+
+#pragma mark key <-> key mapping test 
+- (void)testKeyNameMapping {
+    [[MapperConfig sharedInstance] mapPropertyName:@"aString" toOtherName:@"a_string"];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"I might be a monkey..." forKey:@"a_string"];
+    Bar *bar = [ClassMapper dict:dict toClass:[Bar class]];
+    STAssertEquals([dict objectForKey:@"a_string"], bar.aString, @"Key mapping failed");
+    
+    NSDictionary *dictCopy = [ClassMapper serialize:bar];
+    STAssertEqualObjects(dict, dictCopy, @"Round trip with key mapping failed. Original: %@, copy: %@", dict, dictCopy);
 }
 @end

@@ -11,7 +11,8 @@
 typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
 
 @interface MapperConfig : NSObject {
-    NSMutableDictionary *mappings_;
+    NSMutableDictionary *classMappings_;
+    NSMutableDictionary *propNameMappings_;
     PreProcBlock preProcBlock_;
 }
 /*
@@ -34,11 +35,26 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
  */
 - (void)mapKey:(NSString*)key toClass:(Class)class;
 /*
- * A dictionary of the current mappings.
+ * A dictionary of the current key -> class mappings.
  */
-- (NSDictionary*)mappings;
+- (NSDictionary*)classMappings;
+/*
+ * Create a bidirectional mapping between two key names. During
+ * serialization or deserialization, if a mapping is found, the
+ * new name will be substituted. So if you create a "foo" <-> "bar"
+ * mapping, anytime the key "foo" is found, it will be swapped with "bar"
+ * and vice-versa.
+ */
+- (void)mapPropertyName:(NSString*)name toOtherName:(NSString*)other;
+/*
+ * A dictionary of the current key <-> key mappings.
+ */
+- (NSDictionary*)propertyMappings;
 /*
  * Clear any mappings or blocks.
  */
 - (void)clearConfig;
+
+#pragma mark protected
+- (NSString*)_trueKey:(NSString*)key;
 @end

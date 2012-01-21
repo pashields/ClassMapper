@@ -47,6 +47,8 @@ To continue with the example from above, we would add a mapping between the "foo
 ``` objective-c
 [[MapperConfig sharedInstance] mapKey:@"foos" toClass:[Foo class]];
 ```
+
+Check out additional MapperConfig options on the [wiki](https://github.com/pashields/ClassMapper/wiki/Configuration-Options).
 Usage
 ------
 ClassMapper officially supports [CocoaPods](https://github.com/CocoaPods/CocoaPods). We aren't hosted there yet, but once we reach 0.0.1, we can submit.

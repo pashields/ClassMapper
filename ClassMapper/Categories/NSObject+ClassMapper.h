@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MapperConfig.h"
 #import "Serializable.h"
 /* Reflection */
 #import <Foundation/NSObjCRuntime.h>
