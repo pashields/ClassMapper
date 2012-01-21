@@ -62,7 +62,9 @@ Status
 ------
 So far this is a just a little toy project of mine. The long term goal is to build myself a little stack of libraries that can be used to interact painlessly with RESTful APIs. I hope to write as few of those libraries as possible. Consider this current version unstable and barely tested. The code is short and simple though, so you can evaluate it on your own.
 
-For more info, you can look at ClassMapper.org (emacs org-mode).
+I am utilizing this in a personal project of mine (integrated into AFNetworking and consuming JSON). If you are interested in more immediate access to this work, feel free to ping me.
+
+For more info, you can look at the ClassMapper.org file (emacs org-mode).
 
 License
 -------
