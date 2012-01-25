@@ -9,7 +9,13 @@
 #import "NSNumber+ClassMapper.h"
 
 @implementation NSNumber (ClassMapper)
-- (id)_cm_serialize {
+- (NSNumber *)_cm_serialize {
     return self;
+}
++ (NSNumber *)_cm_inst_from:(NSNumber *)serialized withClass:(Class)class {
+    return serialized;
+}
+- (NSNumber *)_cm_update_with:(NSNumber *)serialized withClass:(Class)class {
+    return serialized;
 }
 @end

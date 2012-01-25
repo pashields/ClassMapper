@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8403050814D875FA008603DA /* NSMutableDictionary+ClassMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8403050614D875FA008603DA /* NSMutableDictionary+ClassMapper.h */; };
+		8403050914D875FA008603DA /* NSMutableDictionary+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8403050714D875FA008603DA /* NSMutableDictionary+ClassMapper.m */; };
 		8421530614B60CE2001999B6 /* Zip.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421530514B60CE2001999B6 /* Zip.m */; };
 		8448A63B14BF938000F457E1 /* NSArray+ClassMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8448A63014BF938000F457E1 /* NSArray+ClassMapper.h */; };
 		8448A63C14BF938000F457E1 /* NSArray+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448A63114BF938000F457E1 /* NSArray+ClassMapper.m */; };
@@ -20,6 +22,9 @@
 		8448A64414BF938000F457E1 /* NSString+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448A63914BF938000F457E1 /* NSString+ClassMapper.m */; };
 		8448A64514BF938000F457E1 /* Serializable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8448A63A14BF938000F457E1 /* Serializable.h */; };
 		845E096C14BB9882007066E4 /* ArrayHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 845E096B14BB9882007066E4 /* ArrayHolder.m */; };
+		84655A9A14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84655A9814D0DAE400B9AD34 /* NSMutableArray+ClassMapper.h */; };
+		84655A9B14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84655A9914D0DAE400B9AD34 /* NSMutableArray+ClassMapper.m */; };
+		84655AA114D1ED1C00B9AD34 /* Mappable.h in Headers */ = {isa = PBXBuildFile; fileRef = 84655AA014D1ED1C00B9AD34 /* Mappable.h */; };
 		848C2436148BE9CA001859C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848C2435148BE9CA001859C8 /* Foundation.framework */; };
 		848C243C148BE9CA001859C8 /* ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C243B148BE9CA001859C8 /* ClassMapper.m */; };
 		848C2444148BE9CA001859C8 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848C2443148BE9CA001859C8 /* SenTestingKit.framework */; };
@@ -45,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8403050614D875FA008603DA /* NSMutableDictionary+ClassMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+ClassMapper.h"; path = "Categories/NSMutableDictionary+ClassMapper.h"; sourceTree = "<group>"; };
+		8403050714D875FA008603DA /* NSMutableDictionary+ClassMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableDictionary+ClassMapper.m"; path = "Categories/NSMutableDictionary+ClassMapper.m"; sourceTree = "<group>"; };
 		8421530414B60CE2001999B6 /* Zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zip.h; sourceTree = "<group>"; };
 		8421530514B60CE2001999B6 /* Zip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zip.m; sourceTree = "<group>"; };
 		8448A63014BF938000F457E1 /* NSArray+ClassMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+ClassMapper.h"; path = "Categories/NSArray+ClassMapper.h"; sourceTree = "<group>"; };
@@ -60,6 +67,9 @@
 		8448A63A14BF938000F457E1 /* Serializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Serializable.h; path = Categories/Serializable.h; sourceTree = "<group>"; };
 		845E096A14BB9882007066E4 /* ArrayHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayHolder.h; sourceTree = "<group>"; };
 		845E096B14BB9882007066E4 /* ArrayHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayHolder.m; sourceTree = "<group>"; };
+		84655A9814D0DAE400B9AD34 /* NSMutableArray+ClassMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+ClassMapper.h"; path = "Categories/NSMutableArray+ClassMapper.h"; sourceTree = "<group>"; };
+		84655A9914D0DAE400B9AD34 /* NSMutableArray+ClassMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+ClassMapper.m"; path = "Categories/NSMutableArray+ClassMapper.m"; sourceTree = "<group>"; };
+		84655AA014D1ED1C00B9AD34 /* Mappable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mappable.h; path = Categories/Mappable.h; sourceTree = "<group>"; };
 		848C2432148BE9CA001859C8 /* libClassMapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libClassMapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C2435148BE9CA001859C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		848C2439148BE9CA001859C8 /* ClassMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassMapper-Prefix.pch"; sourceTree = "<group>"; };
@@ -193,10 +203,15 @@
 		DA0EEE9D14AB6C8500DE91AA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				84655AA014D1ED1C00B9AD34 /* Mappable.h */,
 				8448A63014BF938000F457E1 /* NSArray+ClassMapper.h */,
 				8448A63114BF938000F457E1 /* NSArray+ClassMapper.m */,
 				8448A63214BF938000F457E1 /* NSDictionary+ClassMapper.h */,
 				8448A63314BF938000F457E1 /* NSDictionary+ClassMapper.m */,
+				84655A9814D0DAE400B9AD34 /* NSMutableArray+ClassMapper.h */,
+				84655A9914D0DAE400B9AD34 /* NSMutableArray+ClassMapper.m */,
+				8403050614D875FA008603DA /* NSMutableDictionary+ClassMapper.h */,
+				8403050714D875FA008603DA /* NSMutableDictionary+ClassMapper.m */,
 				8448A63414BF938000F457E1 /* NSNumber+ClassMapper.h */,
 				8448A63514BF938000F457E1 /* NSNumber+ClassMapper.m */,
 				8448A63614BF938000F457E1 /* NSObject+ClassMapper.h */,
@@ -222,6 +237,9 @@
 				8448A64114BF938000F457E1 /* NSObject+ClassMapper.h in Headers */,
 				8448A64314BF938000F457E1 /* NSString+ClassMapper.h in Headers */,
 				8448A64514BF938000F457E1 /* Serializable.h in Headers */,
+				84655A9A14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.h in Headers */,
+				84655AA114D1ED1C00B9AD34 /* Mappable.h in Headers */,
+				8403050814D875FA008603DA /* NSMutableDictionary+ClassMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +348,8 @@
 				8448A64014BF938000F457E1 /* NSNumber+ClassMapper.m in Sources */,
 				8448A64214BF938000F457E1 /* NSObject+ClassMapper.m in Sources */,
 				8448A64414BF938000F457E1 /* NSString+ClassMapper.m in Sources */,
+				84655A9B14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.m in Sources */,
+				8403050914D875FA008603DA /* NSMutableDictionary+ClassMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

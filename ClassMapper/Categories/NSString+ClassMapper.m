@@ -9,7 +9,13 @@
 #import "NSString+ClassMapper.h"
 
 @implementation NSString (ClassMapper)
-- (id)_cm_serialize {
+- (NSString *)_cm_serialize {
     return [self copy];
+}
++ (NSString *)_cm_inst_from:(NSString *)serialized withClass:(Class)class {
+    return [serialized _cm_serialize];
+}
+- (NSString *)_cm_update_with:(NSString *)serialized withClass:(Class)class {
+    return [serialized _cm_serialize];
 }
 @end

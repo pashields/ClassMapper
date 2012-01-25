@@ -7,38 +7,38 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MapperConfig.h"
-/* Reflection */
-#import <Foundation/NSObjCRuntime.h>
-#import <objc/runtime.h>
 /* Categories */
 #import "NSString+ClassMapper.h"
 #import "NSNumber+ClassMapper.h"
 #import "NSArray+ClassMapper.h"
 #import "NSDictionary+ClassMapper.h"
 #import "NSObject+ClassMapper.h"
+#import "NSMutableArray+ClassMapper.h"
+#import "NSMutableDictionary+ClassMapper.h"
 
 #define LOG_KEY_MISSING NO
+@protocol Serializable;
+@protocol Mappable;
 
 @interface ClassMapper : NSObject
-/*
- * Converts a dictionary into an instance of a particular class.
- * Requires the class to follow KVC (Key-value coding) conventions.
- * Will fail if fields exist in the dict, but are not properties of the
- * class supplied by classType.
- *
- * Nested objects are handled by using the MapperConfig class to map
- * string names to class types. Nested objects can be in an array as well.
+/* 
+ * Updates an existing Key Value Compliant (KVC) object
+ * with new serialized data. The serialized data must be inside
+ * a collection that implements the complete mappable interface.
  */
-+ (id)dict:(NSDictionary*)dict toClass:(Class)classType;
++ (id)deserialize:(id<Mappable>)serialized toInstance:(id)instance;
 /*
- * Converts an array of dictionaries to an array of objects with
- * identical semantics.
+ * In general, this is a shorthand for creating a new instance and
+ * then deserializing it using the above. In the case the serialized
+ * data is an array, this will create a new NSArray instance populated
+ * with objects of class classType.
  */
-+ (NSArray*)dictArray:(NSArray*)dicts toClass:(Class)classType;
++ (id)deserialize:(id<Mappable>)serialized toClass:(Class)classType;
 /*
  * Converts an object to a JSON-compatible dictionary. Requires the
  * object to implement the serializable protocol, or be KVC compliant.
  */
 + (id)serialize:(id<Serializable>)obj;
+#pragma mark protected
++ (BOOL)_descClass:(Class)desc isKindOf:(Class)parent;
 @end

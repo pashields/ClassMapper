@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Bar : NSObject {
-    NSString *aString_;
-}
+@interface Bar : NSObject
 @property(strong, nonatomic)NSString *aString;
+@property(strong, nonatomic)NSNumber *aNumber;
 @end

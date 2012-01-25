@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Serializable.h"
+#import "Mappable.h"
 
-@interface NSArray (ClassMapper) <Serializable>
+@interface NSArray (ClassMapper) <Serializable, Mappable>
 @end

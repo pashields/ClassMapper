@@ -7,9 +7,10 @@
 //
 
 #import "NSDictionary+ClassMapper.h"
+#import "MapperConfig.h"
 
 @implementation NSDictionary (ClassMapper)
-- (id)_cm_serialize {
+- (NSDictionary *)_cm_serialize {
     NSMutableDictionary *copy = [NSMutableDictionary dictionaryWithCapacity:[self count]];
     for (NSString *key in [self allKeys]) {
         id<Serializable> val = [self objectForKey:key];
@@ -17,5 +18,8 @@
     }
     
     return copy;
+}
++ (NSDictionary *)_cm_inst_from:(NSDictionary *)serialized withClass:(Class)class {
+    return [[NSMutableDictionary new] _cm_update_with:serialized withClass:class];
 }
 @end

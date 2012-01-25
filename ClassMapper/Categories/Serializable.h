@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+/* 
+ * Must be implemented by any class that will be encountered by
+ * ClassMapper (that is not KVC compliant). If the class is mutable,
+ * copying is reccomended.
+ */
 @protocol Serializable
+/*
+ * Returns a serialized version of the instance.
+ */
 - (id)_cm_serialize;
 @end

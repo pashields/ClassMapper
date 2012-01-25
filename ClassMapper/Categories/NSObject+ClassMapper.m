@@ -7,18 +7,21 @@
 //
 
 #import "NSObject+ClassMapper.h"
+#import "MapperConfig.h"
+#import "ClassMapper.h"
+/* Reflection */
+#import <Foundation/NSObjCRuntime.h>
+#import <objc/runtime.h>
 
+@interface NSObject ()
++ (Class)classFromAttribute:(NSString *)attr;
++ (Class)classFromAttribute:(Class)attrClass andKey:(NSString *)key;
+@end
 @implementation NSObject (ClassMapper)
-- (id)_cm_serialize {
-    unsigned int outCount;
-    NSMutableSet *propSet = [NSMutableSet set];
-    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
-    for (int i=0; i<outCount; i++) {
-        objc_property_t property = properties[i];
-        [propSet addObject:[NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding]];
-    }
+- (NSDictionary *)_cm_serialize {
+    NSArray *propSet = [[self _cm_properties] allKeys];
     
-    NSMutableDictionary *serialized = [NSMutableDictionary dictionaryWithCapacity:outCount];
+    NSMutableDictionary *serialized = [NSMutableDictionary dictionaryWithCapacity:[propSet count]];
     
     /* propName is strong in case we need to change it */
     for (__strong NSString *propName in propSet) {
@@ -28,5 +31,74 @@
     }
     
     return serialized;
+}
+- (NSDictionary *)_cm_properties {
+    unsigned int outCount;
+    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
+    NSMutableDictionary *propToAttr = [NSMutableDictionary dictionary];
+    for (int i=0; i<outCount; i++) {
+        objc_property_t property = properties[i];
+        NSString *propName = [NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding];
+        NSString *propAttr = [NSString stringWithCString:property_getAttributes(property) encoding:NSASCIIStringEncoding];
+        [propToAttr setValue:propAttr forKey:propName];
+    }
+    
+    return propToAttr;
+}
+- (NSObject *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class {
+    NSDictionary *propToAttr = [self _cm_properties];
+    /* All property keys for the instance */
+    NSArray *classKeys = [propToAttr allKeys];
+    
+    /* key is strong so we can swap it if need be */
+    for (__strong NSString *key in [serialized allKeys]) {
+        /* The value */
+        id val = [serialized objectForKey:key];
+        /* Update the key according to config, might swap */
+        key = [[MapperConfig sharedInstance] _trueKey:key];
+
+        /* Check if key is in source object only */
+        if (![classKeys containsObject:key]) {
+            if (LOG_KEY_MISSING) {
+                NSLog(@"Property %@ does not exist in class %@, but is found in source object %@",
+                      key, [self class], serialized);
+            }
+            continue;
+        }
+        
+        /* Create the instance, by Mappable protocol if possible */
+        if (![self valueForKey:key]) {            
+            Class valClass = [NSObject classFromAttribute:[propToAttr objectForKey:key]];
+            Class toClass = [NSObject classFromAttribute:valClass andKey:key];
+            
+            [self setValue:[ClassMapper deserialize:val toClass:toClass]
+                    forKey:key];
+        } else {
+            /* Update existing instance */
+            id subInst = [self valueForKey:key];
+            [self setValue:[subInst _cm_update_with:val withClass:[[MapperConfig sharedInstance] classFromKey:key]] 
+                    forKey:key];
+        }
+    }
+    
+    return self;
+}
+
++ (Class)classFromAttribute:(NSString *)attr {
+    if (![attr hasPrefix:@"T@\""]) {
+        [NSException raise:@"Cannot determine class of sub-object" 
+                    format:@"Cannot map sub-object with format: %@", attr];
+    }
+    
+    NSArray *components = [attr componentsSeparatedByString:@"\""];
+    return NSClassFromString([components objectAtIndex:1]);
+}
+
++ (Class)classFromAttribute:(Class)attrClass andKey:(NSString *)key {
+    if ([ClassMapper _descClass:attrClass isKindOf:[NSArray class]]) {
+        return [[MapperConfig sharedInstance] classFromKey:key];
+    } else {
+        return attrClass;
+    }
 }
 @end

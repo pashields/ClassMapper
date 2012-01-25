@@ -7,8 +7,9 @@
 //
 
 #import "MapperConfig.h"
-
-#define DEFAULT_PREPROC ^(NSDictionary* dict) {return dict;}
+/* Reflection */
+#import <Foundation/NSObjCRuntime.h>
+#import <objc/runtime.h>
 
 @interface MapperConfig ()
 @property(nonatomic, strong)NSMutableDictionary *classMappings;
@@ -18,10 +19,9 @@
 @implementation MapperConfig
 @synthesize classMappings=classMappings_;
 @synthesize propNameMappings=propNameMappings_;
-@synthesize preProcBlock=preProcBlock_;
 
 #pragma mark singleton
-+ (MapperConfig*)sharedInstance {
++ (MapperConfig *)sharedInstance {
     static MapperConfig *instance = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -39,28 +39,32 @@
     
     return self;
 }
-- (void)mapKey:(NSString*)key toClass:(Class)class {
+- (void)mapKey:(NSString *)key toClass:(Class)class {
     [self.classMappings setObject:class forKey:key];
 }
-- (NSDictionary*)classMappings {
+- (NSDictionary *)classMappings {
     return classMappings_;
 }
-- (void)mapPropertyName:(NSString*)name toOtherName:(NSString*)other {
+- (void)mapPropertyName:(NSString *)name toOtherName:(NSString *)other {
     [self.propNameMappings setObject:name forKey:other];
     [self.propNameMappings setObject:other forKey:name];
 }
-- (NSDictionary*)propertyMappings {
+- (NSDictionary *)propertyMappings {
     return propNameMappings_;
 }
 - (void)clearConfig {
     self.classMappings = [NSMutableDictionary dictionary];
     self.propNameMappings = [NSMutableDictionary new];
-    self.preProcBlock = DEFAULT_PREPROC;
+}
+- (Class)classFromKey:(NSString *)key {
+    return [self.classMappings objectForKey:key] != nil ? 
+    [self.classMappings objectForKey:key] :
+    nil;
 }
 
 #pragma mark protected
 /* Give us the mapped key, else the original */
-- (NSString*)_trueKey:(NSString*)key {
+- (NSString *)_trueKey:(NSString *)key {
     NSString *potKey = [self.propNameMappings objectForKey:key];
     return potKey ? potKey : key;
 }

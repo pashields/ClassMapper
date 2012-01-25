@@ -13,11 +13,7 @@
 #import "Bar.h"
 #import "Zip.h"
 #import "ArrayHolder.h"
-
-/* Private funcs being used in testing */
-@interface ClassMapper ()
-+ (BOOL)descClass:(Class)desc isKindOf:(Class)parent;
-@end
+#import "Serializable.h"
 
 @interface ClassMapperTests : SenTestCase
 

@@ -9,5 +9,6 @@
 #import "Bar.h"
 
 @implementation Bar
-@synthesize aString=aString_;
+@synthesize aString;
+@synthesize aNumber;
 @end

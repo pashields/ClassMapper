@@ -9,13 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Bar.h"
 
-@interface Foo : NSObject {
-    NSString *aString;
-    NSNumber *aNumber;
-    
-    NSArray *anArray;
-    Bar *aBar;
-}
+@interface Foo : NSObject
 @property(strong, nonatomic)NSString *aString;
 @property(strong, nonatomic)NSNumber *aNumber;
 @property(strong, nonatomic)NSArray *anArray;

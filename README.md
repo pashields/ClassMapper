@@ -5,50 +5,40 @@ ClassMapper is a simple obj-c library for converting classes which follow Key-Va
 API
 ---
 ###ClassMapper
-The ClassMapper object contains two primary methods:
+ClassMapper has two main methods, serialize and deserialize. Serialize is relatively straightforward:
 
 ``` objective-c
 + (id)serialize:(id<Serializable>)obj;
+// e.g.
+Foo *foo = [Foo new];
+foo.aString = @"Woohoo";
+[ClassMapper serialize:foo]; //NSDictionary, {"aString":"Woohoo"}
 ```
-The +serialize method behaves as expected. Arrays and Nested objects are handled using NSArray and NSDictionary respectively. The only primatives currently supported are NSString and NSNumber. All other objects will be serialized according to KVC. For custom behavior, you can add a category that causes the class to implement the Serializable protocol.
+
+Of course, this wouldn't be any fun without the ability to deserialize:
 
 ``` objective-c
-+ (id)dict:(NSDictionary*)dict toClass:(Class)classType;
++ (id)deserialize:(id<Mappable>)serialized toInstance:(id)instance;
+// e.g.
+NSDictionary *dict = [NSDictionary dictionaryWithObject:@"Woohoo" forKey:@"aString"];
+Foo *foo = [Foo new];
+foo.aString = @"NOOOOOO!!!";
+[ClassMapper deserialize:dict toInstance:foo]; //Foo.aString == @"Woohoo";
 ```
-The +dict: toClass: method is a little bit more subtle. The mapper will work as expected, except when the class contains an NSArray containing Objects that have been converted into NSDictionaries and should be automatically converted into instances of a particular class. 
 
-However, if we have an array à la
+For convenience, you can also allow ClassMapper to create the object for you:
 
 ``` objective-c
-@interface Foo : NSObject
-@property (nonatomic, retain)NSString *str;
-@end
-@interface Bar : NSObject
-@property (nonatomic, retain)NSArray *foos;
-@end
-/* -------------------------- */
-Bar *bar = [Bar new];
-Foo *fooA = [Foo new];
-[bar.foos addObject:fooA];
-Foo *fooB = [Foo new];
-[bar.foos addObject:fooB];
-```
-We need to tell ClassMapper that when it encounters the NSDictionary key @"foos" with a value that is an NSArray, it should deserialize into a Foo object. To do this, we use a singleton MapperConfig object. 
++ (id)deserialize:(id<Mappable>)serialized toClass:(Class)classType;
+``` 
+
+To learn more about these commands, visit the [wiki](https://github.com/pashields/ClassMapper/wiki).
 
 ###MapperConfig
-To create the mapping we use the following method:
+The MapperConfig singleton allows you to modify portions of the serialization/deserialization process.
 
-``` objective-c
-- (void)mapKey:(NSString*)key toClass:(Class)class;
-```
+Check out MapperConfig options on the [wiki](https://github.com/pashields/ClassMapper/wiki/Configuration-Options).
 
-To continue with the example from above, we would add a mapping between the "foos" key and the Foo class.
-
-``` objective-c
-[[MapperConfig sharedInstance] mapKey:@"foos" toClass:[Foo class]];
-```
-
-Check out additional MapperConfig options on the [wiki](https://github.com/pashields/ClassMapper/wiki/Configuration-Options).
 Usage
 ------
 ClassMapper officially supports [CocoaPods](https://github.com/CocoaPods/CocoaPods). We aren't hosted there yet, but once we reach 0.0.1, we can submit.
@@ -56,11 +46,11 @@ ClassMapper officially supports [CocoaPods](https://github.com/CocoaPods/CocoaPo
 You can also add ClassMapper manually, either as source or (preferably) a static library. It is important to note two things:
 
 * ClassMapper uses ARC, so if you don't use ARC, your best option is to include as a static library.
-* If you are using the static library, the -ObjC flag must be added to "Other Linker Flags" in your xcodeproj.  See [this apple Q&A](http://developer.apple.com/library/mac/#qa/qa1490/_index.html) about categories to better understand why we need this linker flag.
+* If you are using the static library, the -ObjC flag must be added to "Other Linker Flags" in your xcodeproj.  See [this apple Q&A](http://developer.apple.com/library/mac/#qa/qa1490/_index.html) about categories to better understand why you need this linker flag.
 
 Status
 ------
-So far this is a just a little toy project of mine. The long term goal is to build myself a little stack of libraries that can be used to interact painlessly with RESTful APIs. I hope to write as few of those libraries as possible. Consider this current version unstable and barely tested. The code is short and simple though, so you can evaluate it on your own.
+So far this is a just a little project of mine. The long term goal is to build myself a little stack of libraries that can be used to interact painlessly with RESTful APIs. I hope to write as few of those libraries as possible. The API has been very unstable, though I expect that to lessen as time goes on. We do have a fairly large test suite, though I do not think it covers all possible cases/semantics.
 
 I am utilizing this in a personal project of mine (integrated into AFNetworking and consuming JSON). If you are interested in more immediate access to this work, feel free to ping me.
 

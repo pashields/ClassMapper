@@ -7,11 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MapperConfig.h"
 #import "Serializable.h"
-/* Reflection */
-#import <Foundation/NSObjCRuntime.h>
-#import <objc/runtime.h>
+#import "Mappable.h"
 
-@interface NSObject (ClassMapper) <Serializable>
+@interface NSObject (ClassMapper) <Serializable, Mappable>
+- (NSDictionary *)_cm_properties;
 @end
