@@ -9,6 +9,7 @@
 #import "NSMutableDictionary+ClassMapper.h"
 #import "NSNumber+ClassMapper.h"
 #import "MapperConfig.h"
+#define FIRST_NOT_NULL(x,y,z) (x ? x : (y ? y : z))
 
 @implementation NSMutableDictionary (ClassMapper)
 - (NSDictionary *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class {
