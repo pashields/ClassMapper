@@ -43,6 +43,8 @@
         [propToAttr setValue:propAttr forKey:propName];
     }
     
+    free(properties);
+    
     return propToAttr;
 }
 - (NSObject *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class {
