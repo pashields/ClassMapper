@@ -165,6 +165,21 @@
                          @"Array obj not deserialized properly: %@", second);
 }
 
+- (void)testArrayNestedToObjWithNestedArray {
+    /* {"anArray":[ [{"aString":"Scala sucks. I read it on HN"}] ]} -> ArrayHolder */
+    NSDictionary *barDict = [NSDictionary dictionaryWithObject:@"Scala sucks. I read it on HN" 
+                                                        forKey:@"aString"];
+    NSArray *barRay = [NSArray arrayWithObject:barDict];
+    NSArray *rayRay = [NSArray arrayWithObject:barRay]; // RayRay ain't had no job for some time...
+    NSDictionary *ahDict = [NSDictionary dictionaryWithObject:rayRay forKey:@"anArray"];
+    
+    [[MapperConfig sharedInstance] mapKey:@"anArray" toClass:[Bar class]];
+    ArrayHolder *holder = [ClassMapper deserialize:ahDict toClass:[ArrayHolder class]];
+    
+    STAssertTrue([[[holder.anArray lastObject] lastObject] isKindOfClass:[Bar class]], 
+                 @"Class not being propogated through nested arrays");
+}
+
 #pragma mark to instance
 - (void)testDictToInstance {
     /* {"aString":"hi", "aNumber":10} -> Foo, Foo.aString=@"bye" */
