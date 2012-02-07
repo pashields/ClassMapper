@@ -19,7 +19,14 @@
 }
 
 + (id)deserialize:(id)serialized toClass:(Class)classType {
-    if ([serialized isKindOfClass:[NSArray class]]) {
+    /* Generally we want to treat class information at the collection level
+       if the collection is not pair oriented. Dicitionaries sort of lie
+       about the fast enumeration (you just get keys), so we explicitly
+       throw them out. But otherwise, this makes it a lot easier to do
+       something like use a set.
+     */
+    if (![serialized isKindOfClass:[NSDictionary class]] &&
+        [serialized conformsToProtocol:@protocol(NSFastEnumeration)]) {
         return [NSArray _cm_inst_from:serialized withClass:classType];
     } else if ([classType respondsToSelector:@selector(_cm_inst_from:withClass:)]) {
         return [classType _cm_inst_from:serialized withClass:classType];

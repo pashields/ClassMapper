@@ -15,14 +15,14 @@
 - (NSDictionary *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class {
     /* Because of class clusters, we have to handle both the mutable and immutable cases here */
     if ([self classForCoder] == [NSDictionary class]) {
-        for (NSString *key in [serialized allKeys]) {
+        for (NSString *key in serialized) {
             id instance = [self valueForKey:key];
             [instance _cm_update_with:[serialized objectForKey:key] 
                             withClass:[[MapperConfig sharedInstance] classFromKey:key]];
         }
     } else {
         [self removeAllObjects];
-        for (NSString *key in [serialized allKeys]) {
+        for (NSString *key in serialized) {
             id cereal = [serialized objectForKey:key];
             class = FIRST_NOT_NULL([[MapperConfig sharedInstance] classFromKey:key], 
                                    [cereal class], class);

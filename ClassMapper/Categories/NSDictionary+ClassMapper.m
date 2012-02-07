@@ -12,7 +12,7 @@
 @implementation NSDictionary (ClassMapper)
 - (NSDictionary *)_cm_serialize {
     NSMutableDictionary *copy = [NSMutableDictionary dictionaryWithCapacity:[self count]];
-    for (NSString *key in [self allKeys]) {
+    for (NSString *key in self) {
         id<Serializable> val = [self objectForKey:key];
         [copy setValue:[val _cm_serialize] forKey:key];
     }
