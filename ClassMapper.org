@@ -8,10 +8,10 @@
 ** DONE Switch from Class based mapping to instance based.
 ** DONE Update Readme with new examples
 ** DONE Remove preProcBlock documentation
-** TODO Document debug options
 ** DONE Add a way to map remote key names to locals (not sure if this should be local or global).
-** TODO Add notes to wiki about bootstrapping mappings via plist.
+** DONE Add notes to wiki about bootstrapping mappings via plist.
 ** DONE Add custom deserialization routines for mutability issues at least.
+** TODO Document debug options
 ** TODO Setup appledoc
 ** TODO Figure out a better solution to the arrays of serialized objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
 ** TODO Document and/or design date handling.
@@ -19,7 +19,6 @@
 * Categories to bundle
 ** TODO Set
 ** TODO Boolean
-
 
 * KVC edge cases to investigate
 ** TODO Figure out if one -> many relationships are any different for us.
