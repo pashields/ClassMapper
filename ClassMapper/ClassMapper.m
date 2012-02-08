@@ -27,7 +27,7 @@
      */
     if (![serialized isKindOfClass:[NSDictionary class]] &&
         [serialized conformsToProtocol:@protocol(NSFastEnumeration)]) {
-        return [NSArray _cm_inst_from:serialized withClass:classType];
+        return [[serialized class] _cm_inst_from:serialized withClass:classType];
     } else if ([classType respondsToSelector:@selector(_cm_inst_from:withClass:)]) {
         return [classType _cm_inst_from:serialized withClass:classType];
     } else {
