@@ -9,7 +9,7 @@
 #import "NSMutableDictionary+ClassMapper.h"
 #import "NSNumber+ClassMapper.h"
 #import "MapperConfig.h"
-#define FIRST_NOT_NULL(x,y,z) (x ? x : (y ? y : z))
+#define FIRST_NOT_NULL(x,y,z,a) (x?x:(y?y:(z?z:a)))
 
 @implementation NSMutableDictionary (ClassMapper)
 - (NSDictionary *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class {
@@ -21,11 +21,15 @@
                             withClass:[[MapperConfig sharedInstance] classFromKey:key]];
         }
     } else {
+        Class instanceClass;
+        if (!class && [self count] > 0) {
+            instanceClass = [[self objectForKey:[[self allKeys] lastObject]] class];
+        }
         [self removeAllObjects];
         for (NSString *key in serialized) {
             id cereal = [serialized objectForKey:key];
             class = FIRST_NOT_NULL([[MapperConfig sharedInstance] classFromKey:key], 
-                                   [cereal class], class);
+                                   instanceClass, [cereal class], class);
             
             id obj;
             if ([class respondsToSelector:@selector(_cm_inst_from:withClass:)]) {
