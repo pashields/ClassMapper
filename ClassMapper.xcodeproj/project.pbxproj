@@ -37,6 +37,7 @@
 		848C245F148BEA37001859C8 /* MapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C245D148BEA37001859C8 /* MapperConfig.m */; };
 		DA0EEEB514AB75C000DE91AA /* Bar.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2465148BEB19001859C8 /* Bar.m */; };
 		DA0EEEB614AB75C000DE91AA /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2467148BEB19001859C8 /* Foo.m */; };
+		DA927F3D14E36F6900FD3401 /* DateHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = DA927F3C14E36F6900FD3401 /* DateHolder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		848C2466148BEB19001859C8 /* Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foo.h; sourceTree = "<group>"; };
 		848C2467148BEB19001859C8 /* Foo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
 		DA0690F914AAB52E006E4DFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		DA927F3B14E36F6900FD3401 /* DateHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHolder.h; sourceTree = "<group>"; };
+		DA927F3C14E36F6900FD3401 /* DateHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHolder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +199,8 @@
 				8421530514B60CE2001999B6 /* Zip.m */,
 				845E096A14BB9882007066E4 /* ArrayHolder.h */,
 				845E096B14BB9882007066E4 /* ArrayHolder.m */,
+				DA927F3B14E36F6900FD3401 /* DateHolder.h */,
+				DA927F3C14E36F6900FD3401 /* DateHolder.m */,
 			);
 			name = "Test Classes";
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				848C2453148BE9CA001859C8 /* ClassMapperTests.m in Sources */,
 				8421530614B60CE2001999B6 /* Zip.m in Sources */,
 				845E096C14BB9882007066E4 /* ArrayHolder.m in Sources */,
+				DA927F3D14E36F6900FD3401 /* DateHolder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

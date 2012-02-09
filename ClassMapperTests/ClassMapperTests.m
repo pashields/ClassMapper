@@ -531,4 +531,16 @@
     
     STAssertEquals(1.5, [bar.aNumber doubleValue], @"Mapping to a number doesn't work");
 }
+- (void)testStringToDate {
+    [[MapperConfig sharedInstance] preProcBlock:^id(id propertyValue) {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd zzzz"];
+        return [df dateFromString:propertyValue];
+    } forPropClass:[NSDate class]];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"2001-01-01 GMT" forKey:@"date"];
+    DateHolder *dateHolder = [ClassMapper deserialize:dict toClass:[DateHolder class]];
+    
+    STAssertEquals(978307200.0, [dateHolder.date timeIntervalSince1970], @"Mapping to a date doesn't work");
+}
 @end

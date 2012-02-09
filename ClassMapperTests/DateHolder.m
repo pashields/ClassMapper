@@ -9,5 +9,5 @@
 #import "DateHolder.h"
 
 @implementation DateHolder
-
+@synthesize date;
 @end

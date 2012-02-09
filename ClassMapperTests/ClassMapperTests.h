@@ -14,6 +14,7 @@
 #import "Zip.h"
 #import "ArrayHolder.h"
 #import "Serializable.h"
+#import "DateHolder.h"
 
 @interface ClassMapperTests : SenTestCase
 

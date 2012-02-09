@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface DateHolder : NSObject
-
+@property(nonatomic, strong)NSDate *date;
 @end
