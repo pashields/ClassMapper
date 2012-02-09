@@ -14,11 +14,13 @@
 @interface MapperConfig ()
 @property(nonatomic, strong)NSMutableDictionary *classMappings;
 @property(nonatomic, strong)NSMutableDictionary *propNameMappings;
+@property(nonatomic, strong)NSMutableDictionary *propBlockMappings;
 @end
 
 @implementation MapperConfig
 @synthesize classMappings=classMappings_;
 @synthesize propNameMappings=propNameMappings_;
+@synthesize propBlockMappings=propBlockMappings_;
 
 #pragma mark singleton
 + (MapperConfig *)sharedInstance {
@@ -54,12 +56,25 @@
 }
 - (void)clearConfig {
     self.classMappings = [NSMutableDictionary dictionary];
-    self.propNameMappings = [NSMutableDictionary new];
+    self.propNameMappings = [NSMutableDictionary dictionary];
+    self.propBlockMappings = [NSMutableDictionary dictionary];
 }
 - (Class)classFromKey:(NSString *)key {
     return [self.classMappings objectForKey:key] != nil ? 
     [self.classMappings objectForKey:key] :
     nil;
+}
+- (void)preProcBlock:(id (^)(id))block forPropClass:(Class)class {
+    [self.propBlockMappings setValue:block
+                              forKey:NSStringFromClass(class)];
+}
+- (id)processProperty:(id)property ofClass:(Class)class {
+    id (^block)(id) = [self.propBlockMappings objectForKey:NSStringFromClass(class)];
+    if (block) {
+        return block(property);
+    }
+    
+    return property;
 }
 
 #pragma mark protected

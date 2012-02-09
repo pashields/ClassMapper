@@ -13,6 +13,7 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
 @interface MapperConfig : NSObject {
     NSMutableDictionary *classMappings_;
     NSMutableDictionary *propNameMappings_;
+    NSMutableDictionary *propBlockMappings_;
 }
 /*
  * Returns an instance of the mapper config that will
@@ -51,7 +52,18 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
  * key has not been mapped to a class.
  */
 - (Class)classFromKey:(NSString *)key;
-
+/*
+ * Set a block to be run on the serialized version of any property
+ * of a given class. The block will be given only the serialized
+ * version and should return the value to be deserialized and set.
+ */
+- (void)preProcBlock:(id (^)(id propertyValue))block forPropClass:(Class)class;
+/*
+ * Process the serialized version of a property given the
+ * class of the property. Works based of blocks set by
+ * preProcBlock::
+ */
+- (id)processProperty:(id)property ofClass:(Class)class;
 #pragma mark protected
 - (NSString *)_trueKey:(NSString *)key;
 @end

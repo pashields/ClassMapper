@@ -517,4 +517,18 @@
     NSDictionary *dictCopy = [ClassMapper serialize:bar];
     STAssertEqualObjects(dict, dictCopy, @"Round trip with key mapping failed. Original: %@, copy: %@", dict, dictCopy);
 }
+
+#pragma mark property preproc blocks
+- (void)testStringToNumber {
+    [[MapperConfig sharedInstance] preProcBlock:^id(id propertyValue) {
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        return [formatter numberFromString:propertyValue];
+    } forPropClass:[NSNumber class]];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"1.5" forKey:@"aNumber"];
+    Bar *bar = [ClassMapper deserialize:dict toClass:[Bar class]];
+    
+    STAssertEquals(1.5, [bar.aNumber doubleValue], @"Mapping to a number doesn't work");
+}
 @end

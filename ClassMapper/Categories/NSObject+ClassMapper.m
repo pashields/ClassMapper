@@ -68,10 +68,15 @@
             continue;
         }
         
+        /* Get class specified by property */
+        Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:key]];
+        /* Update val if we have a preproc block */
+        val = [[MapperConfig sharedInstance] processProperty:val
+                                                     ofClass:propClass];
+        
         /* Create the instance, by Mappable protocol if possible */
         if (![self valueForKey:key]) {            
-            Class valClass = [NSObject classFromAttribute:[propToAttr objectForKey:key]];
-            Class toClass = [NSObject classFromAttribute:valClass andKey:key];
+            Class toClass = [NSObject classFromAttribute:propClass andKey:key];
             
             [self setValue:[ClassMapper deserialize:val toClass:toClass]
                     forKey:key];
