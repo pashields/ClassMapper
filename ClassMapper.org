@@ -23,3 +23,4 @@
 * KVC edge cases to investigate
 ** TODO Figure out if one -> many relationships are any different for us.
 
+Should we be using a MapperConfig singelton? What if you are communicating with multiple conflicting services. Might be worth it to see if there is a zero-friction way to remove that dependency.
