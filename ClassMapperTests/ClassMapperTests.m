@@ -195,6 +195,20 @@
                          foo.aNumber);
 }
 
+- (void)testDictToInstanceWithId {
+    /* {"stuff":{"aString":"bleh"}} -> IdHolder, IdHolder.stuff=Bar */
+    NSDictionary *barDict = [NSDictionary dictionaryWithObject:@"bleh" forKey:@"aString"];
+    NSDictionary *IdDict = [NSDictionary dictionaryWithObject:barDict forKey:@"stuff"];
+    
+    IdHolder *idHolder = [IdHolder new];
+    idHolder.stuff = [Bar new];
+    [ClassMapper deserialize:IdDict toInstance:idHolder];
+    
+    STAssertTrue([idHolder.stuff isKindOfClass:[Bar class]], @"id sub-instance lost class type");
+    Bar *stuff = idHolder.stuff;
+    STAssertEqualObjects(stuff.aString, @"bleh", @"id sub-instance not properly deserialized into");
+}
+
 - (void)testArrayToInstances {
     /* [{"aString":"MOTORHEAD"}, {"aString":"BLACK SABBATH"}] -> [Bar, Bar], Bar.aString="NickelBack" */
     NSDictionary *dict1 = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];

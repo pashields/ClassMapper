@@ -15,6 +15,7 @@
 #import "ArrayHolder.h"
 #import "Serializable.h"
 #import "DateHolder.h"
+#import "IdHolder.h"
 
 @interface ClassMapperTests : SenTestCase
 

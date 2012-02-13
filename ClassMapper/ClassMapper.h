@@ -17,6 +17,7 @@
 #import "NSMutableDictionary+ClassMapper.h"
 
 #define LOG_KEY_MISSING NO
+#define LOG_ID_OBJ YES
 @protocol Serializable;
 @protocol Mappable;
 

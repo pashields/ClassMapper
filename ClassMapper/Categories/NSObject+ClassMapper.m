@@ -14,8 +14,8 @@
 #import <objc/runtime.h>
 
 @interface NSObject ()
-+ (Class)classFromAttribute:(NSString *)attr;
-+ (Class)classFromAttribute:(Class)attrClass andKey:(NSString *)key;
++ (Class)classFromAttribute:(NSString *)attr withKey:(NSString *)key;
++ (Class)classWtihAttributeClass:(Class)attrClass andAttrKey:(NSString *)key;
 @end
 @implementation NSObject (ClassMapper)
 - (NSDictionary *)_cm_serialize {
@@ -69,14 +69,14 @@
         }
         
         /* Get class specified by property */
-        Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:key]];
+        Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:key] withKey:key];
         /* Update val if we have a preproc block */
         val = [[MapperConfig sharedInstance] processProperty:val
                                                      ofClass:propClass];
         
         /* Create the instance, by Mappable protocol if possible */
         if (![self valueForKey:key]) {            
-            Class toClass = [NSObject classFromAttribute:propClass andKey:key];
+            Class toClass = [NSObject classWtihAttributeClass:propClass andAttrKey:key];
             
             [self setValue:[ClassMapper deserialize:val toClass:toClass]
                     forKey:key];
@@ -91,8 +91,13 @@
     return self;
 }
 
-+ (Class)classFromAttribute:(NSString *)attr {
-    if (![attr hasPrefix:@"T@\""]) {
++ (Class)classFromAttribute:(NSString *)attr withKey:(NSString *)key {
+    if ([attr hasPrefix:@"T@,"]) {
+        if (LOG_ID_OBJ) {
+            NSLog(@"Warning: Property %@ appears to be of type id", key);
+        }
+        return [NSObject class];
+    } else if (![attr hasPrefix:@"T@\""]) {
         [NSException raise:@"Cannot determine class of sub-object" 
                     format:@"Cannot map sub-object with format: %@", attr];
     }
@@ -101,7 +106,7 @@
     return NSClassFromString([components objectAtIndex:1]);
 }
 
-+ (Class)classFromAttribute:(Class)attrClass andKey:(NSString *)key {
++ (Class)classWtihAttributeClass:(Class)attrClass andAttrKey:(NSString *)key {
     if ([ClassMapper _descClass:attrClass isKindOf:[NSArray class]]) {
         return [[MapperConfig sharedInstance] classFromKey:key];
     } else {
