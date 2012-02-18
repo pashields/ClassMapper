@@ -15,10 +15,20 @@
 @implementation ClassMapper
 #pragma mark deserialize
 + (id)deserialize:(id)serialized toInstance:(id)instance {
+    /* We can't turn null into anything else, so just return it */
+    if (serialized == [NSNull null]) {
+        return serialized;
+    }
+    
     return [instance _cm_update_with:serialized withClass:nil];
 }
 
 + (id)deserialize:(id)serialized toClass:(Class)classType {
+    /* We can't turn null into anything else, so just return it */
+    if (serialized == [NSNull null]) {
+        return serialized;
+    }
+    
     /* Generally we want to treat class information at the collection level
        if the collection is not pair oriented. Dicitionaries sort of lie
        about the fast enumeration (you just get keys), so we explicitly

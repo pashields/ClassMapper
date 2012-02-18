@@ -147,7 +147,16 @@
     
     ArrayHolder *ah = [ClassMapper deserialize:dict toClass:[ArrayHolder class]];
     
-    STAssertTrue(ah.anArray == nil, @"Failure to deserialize NSNull");
+    STAssertTrue(ah.anArray == (NSArray *)[NSNull null], @"Failure to deserialize NSNull");
+}
+
+- (void)testDictWithNullForDictToObj {
+    /* {"aDict":null} -> Zip */
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNull new] forKey:@"aDict"];
+    
+    Zip *zip = [ClassMapper deserialize:dict toClass:[Zip class]];
+    
+    STAssertTrue(zip.aDict == (NSDictionary *)[NSNull null], @"Failure to deserialize NSNull when null is in for dict.");
 }
 #pragma mark array to classarray
 - (void)testArrayToArray {
