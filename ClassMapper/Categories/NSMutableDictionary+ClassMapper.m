@@ -9,6 +9,7 @@
 #import "NSMutableDictionary+ClassMapper.h"
 #import "NSNumber+ClassMapper.h"
 #import "MapperConfig.h"
+#import "ClassMapper.h"
 #define FIRST_NOT_NULL(x,y,z,a) (x?x:(y?y:(z?z:a)))
 
 @implementation NSMutableDictionary (ClassMapper)
@@ -31,12 +32,8 @@
             class = FIRST_NOT_NULL([[MapperConfig sharedInstance] classFromKey:key], 
                                    instanceClass, [cereal class], class);
             
-            id obj;
-            if ([class respondsToSelector:@selector(_cm_inst_from:withClass:)]) {
-                obj = [class _cm_inst_from:cereal withClass:class];
-            } else {
-                obj = [[class new] _cm_update_with:cereal withClass:class];
-            }
+            /* Pass the buck up to main classmapper to handle arrays */
+            id obj = [ClassMapper deserialize:cereal toClass:class];
             [self setValue:obj forKey:key];
         }
     }

@@ -55,6 +55,23 @@
                          [foo.anArray lastObject]);
 }
 
+- (void)testDictToDictComplexArray {
+    /* {"anArray":[ {"aString":"MOTORHEAD"} ]} -> NSDictionary */
+    NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
+    NSMutableArray *array = [NSMutableArray arrayWithObject:subObj];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:array forKey:@"anArray"];
+    
+    [[MapperConfig sharedInstance] mapKey:@"anArray" toClass:[Bar class]];
+    
+    NSDictionary *foo = [ClassMapper deserialize:dict toClass:[NSDictionary class]];
+    
+    int count = [[foo objectForKey:@"anArray"] count];
+    STAssertTrue(count > 0, @"There are no items in the array: %@", [foo objectForKey:@"anArray"]);
+    Bar *bar = [[foo objectForKey:@"anArray"] lastObject];
+    STAssertEqualObjects(bar.aString, @"MOTORHEAD", @"Contents of the array were not deserialized properly: %@", 
+                         [[foo objectForKey:@"anArray"] lastObject]);
+}
+
 - (void)testDictToObjComplexUnMappedArray {
     /* {"anArray":[ {"aString":"MOTORHEAD"} ]} -> Foo */
     NSDictionary *subObj = [NSDictionary dictionaryWithObject:@"MOTORHEAD" forKey:@"aString"];
