@@ -15,7 +15,7 @@
 
 @interface NSObject ()
 + (Class)classFromAttribute:(NSString *)attr withKey:(NSString *)key;
-+ (Class)classWtihAttributeClass:(Class)attrClass andAttrKey:(NSString *)key;
++ (Class)classWithAttributeClass:(Class)attrClass andAttrKey:(NSString *)key;
 @end
 @implementation NSObject (ClassMapper)
 - (NSDictionary *)_cm_serialize {
@@ -76,7 +76,7 @@
         
         /* Create the instance, by Mappable protocol if possible */
         if (![self valueForKey:key]) {            
-            Class toClass = [NSObject classWtihAttributeClass:propClass andAttrKey:key];
+            Class toClass = [NSObject classWithAttributeClass:propClass andAttrKey:key];
             
             [self setValue:[ClassMapper deserialize:val toClass:toClass]
                     forKey:key];
@@ -106,7 +106,7 @@
     return NSClassFromString([components objectAtIndex:1]);
 }
 
-+ (Class)classWtihAttributeClass:(Class)attrClass andAttrKey:(NSString *)key {
++ (Class)classWithAttributeClass:(Class)attrClass andAttrKey:(NSString *)key {
     if ([ClassMapper _descClass:attrClass isKindOf:[NSArray class]]) {
         return [[MapperConfig sharedInstance] classFromKey:key];
     } else {

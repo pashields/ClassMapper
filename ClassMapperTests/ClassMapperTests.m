@@ -140,6 +140,15 @@
     Bar *bar = [ClassMapper deserialize:dict toClass:[Bar class]];
     STAssertEquals(@"foo", bar.aString, @"Dict not properly deserialized: %@", dict);
 }
+
+- (void)testDictWithNullToObj {
+    /* {"anArray":null} -> ArrayHolder */
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNull new] forKey:@"anArray"];
+    
+    ArrayHolder *ah = [ClassMapper deserialize:dict toClass:[ArrayHolder class]];
+    
+    STAssertTrue(ah.anArray == nil, @"Failure to deserialize NSNull");
+}
 #pragma mark array to classarray
 - (void)testArrayToArray {
     /* [{"aString":"MOTORHEAD"}, {"aString":"BLACK SABBATH"}] -> [Bar, Bar] */

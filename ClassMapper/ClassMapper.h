@@ -15,6 +15,7 @@
 #import "NSObject+ClassMapper.h"
 #import "NSMutableArray+ClassMapper.h"
 #import "NSMutableDictionary+ClassMapper.h"
+#import "NSNull+ClassMapper.h"
 
 #define LOG_KEY_MISSING NO
 #define LOG_ID_OBJ YES
