@@ -8,6 +8,8 @@
 
 #import "ClassMapperTests.h"
 
+#import "NSDate+ClassMapper.h"
+
 @implementation ClassMapperTests
 - (void)tearDown {
     [super tearDown];

@@ -24,6 +24,8 @@
 		8448A64414BF938000F457E1 /* NSString+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448A63914BF938000F457E1 /* NSString+ClassMapper.m */; };
 		8448A64514BF938000F457E1 /* Serializable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8448A63A14BF938000F457E1 /* Serializable.h */; };
 		845E096C14BB9882007066E4 /* ArrayHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 845E096B14BB9882007066E4 /* ArrayHolder.m */; };
+		84632DC514F024D200ADA083 /* NSDate+ClassMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84632DC314F024D200ADA083 /* NSDate+ClassMapper.h */; };
+		84632DC614F024D200ADA083 /* NSDate+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84632DC414F024D200ADA083 /* NSDate+ClassMapper.m */; };
 		84655A9A14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84655A9814D0DAE400B9AD34 /* NSMutableArray+ClassMapper.h */; };
 		84655A9B14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84655A9914D0DAE400B9AD34 /* NSMutableArray+ClassMapper.m */; };
 		84655AA114D1ED1C00B9AD34 /* Mappable.h in Headers */ = {isa = PBXBuildFile; fileRef = 84655AA014D1ED1C00B9AD34 /* Mappable.h */; };
@@ -72,6 +74,8 @@
 		8448A63A14BF938000F457E1 /* Serializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Serializable.h; path = Categories/Serializable.h; sourceTree = "<group>"; };
 		845E096A14BB9882007066E4 /* ArrayHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayHolder.h; sourceTree = "<group>"; };
 		845E096B14BB9882007066E4 /* ArrayHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayHolder.m; sourceTree = "<group>"; };
+		84632DC314F024D200ADA083 /* NSDate+ClassMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ClassMapper.h"; sourceTree = "<group>"; };
+		84632DC414F024D200ADA083 /* NSDate+ClassMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ClassMapper.m"; sourceTree = "<group>"; };
 		84655A9814D0DAE400B9AD34 /* NSMutableArray+ClassMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+ClassMapper.h"; path = "Categories/NSMutableArray+ClassMapper.h"; sourceTree = "<group>"; };
 		84655A9914D0DAE400B9AD34 /* NSMutableArray+ClassMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+ClassMapper.m"; path = "Categories/NSMutableArray+ClassMapper.m"; sourceTree = "<group>"; };
 		84655AA014D1ED1C00B9AD34 /* Mappable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mappable.h; path = Categories/Mappable.h; sourceTree = "<group>"; };
@@ -175,6 +179,8 @@
 		848C244B148BE9CA001859C8 /* ClassMapperTests */ = {
 			isa = PBXGroup;
 			children = (
+				84632DC314F024D200ADA083 /* NSDate+ClassMapper.h */,
+				84632DC414F024D200ADA083 /* NSDate+ClassMapper.m */,
 				848C246C148BEB1F001859C8 /* Test Classes */,
 				848C2451148BE9CA001859C8 /* ClassMapperTests.h */,
 				848C2452148BE9CA001859C8 /* ClassMapperTests.m */,
@@ -252,6 +258,7 @@
 				84655AA114D1ED1C00B9AD34 /* Mappable.h in Headers */,
 				8403050814D875FA008603DA /* NSMutableDictionary+ClassMapper.h in Headers */,
 				843EC45514E844B500DD381E /* IdHolder.h in Headers */,
+				84632DC514F024D200ADA083 /* NSDate+ClassMapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +370,7 @@
 				84655A9B14D0DAE500B9AD34 /* NSMutableArray+ClassMapper.m in Sources */,
 				8403050914D875FA008603DA /* NSMutableDictionary+ClassMapper.m in Sources */,
 				843EC45614E844B500DD381E /* IdHolder.m in Sources */,
+				84632DC614F024D200ADA083 /* NSDate+ClassMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
