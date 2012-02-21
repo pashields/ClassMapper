@@ -10,11 +10,7 @@
 
 typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
 
-@interface MapperConfig : NSObject {
-    NSMutableDictionary *classMappings_;
-    NSMutableDictionary *propNameMappings_;
-    NSMutableDictionary *propBlockMappings_;
-}
+@interface MapperConfig : NSObject 
 /*
  * Returns an instance of the mapper config that will
  * be used globaly.
@@ -59,11 +55,23 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
  */
 - (void)preProcBlock:(id (^)(id propertyValue))block forPropClass:(Class)class;
 /*
+ * Set a block to be run on the deserialized version of any property
+ * of a given class. The block will be given only the deserialized
+ * version and should return the value to be serialized and set.
+ */
+- (void)postProcBlock:(id (^)(id propertyValue))block forPropClass:(Class)class;
+/*
  * Process the serialized version of a property given the
  * class of the property. Works based of blocks set by
  * preProcBlock::
  */
-- (id)processProperty:(id)property ofClass:(Class)class;
+- (id)preProcessProperty:(id)property ofClass:(Class)class;
+/*
+ * Process the deserialized version of a property given the
+ * class of the property. Works based of blocks set by
+ * postProcBlock::
+ */
+- (id)postProcessProperty:(id)property ofClass:(Class)class;
 #pragma mark protected
 - (NSString *)_trueKey:(NSString *)key;
 @end

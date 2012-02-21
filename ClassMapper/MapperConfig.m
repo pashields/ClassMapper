@@ -11,16 +11,23 @@
 #import <Foundation/NSObjCRuntime.h>
 #import <objc/runtime.h>
 
-@interface MapperConfig ()
+@interface MapperConfig () {
+    NSMutableDictionary *classMappings_;
+    NSMutableDictionary *propNameMappings_;
+    NSMutableDictionary *preProcBlockMappings_;
+    NSMutableDictionary *postProcBlockMappings_;
+}
 @property(nonatomic, strong)NSMutableDictionary *classMappings;
 @property(nonatomic, strong)NSMutableDictionary *propNameMappings;
-@property(nonatomic, strong)NSMutableDictionary *propBlockMappings;
+@property(nonatomic, strong)NSMutableDictionary *preProcBlockMappings;
+@property(nonatomic, strong)NSMutableDictionary *postProcBlockMappings;
 @end
 
 @implementation MapperConfig
 @synthesize classMappings=classMappings_;
 @synthesize propNameMappings=propNameMappings_;
-@synthesize propBlockMappings=propBlockMappings_;
+@synthesize preProcBlockMappings=preProcBlockMappings_;
+@synthesize postProcBlockMappings=postProcBlockMappings_;
 
 #pragma mark singleton
 + (MapperConfig *)sharedInstance {
@@ -57,7 +64,8 @@
 - (void)clearConfig {
     self.classMappings = [NSMutableDictionary dictionary];
     self.propNameMappings = [NSMutableDictionary dictionary];
-    self.propBlockMappings = [NSMutableDictionary dictionary];
+    self.preProcBlockMappings = [NSMutableDictionary dictionary];
+    self.postProcBlockMappings = [NSMutableDictionary dictionary];
 }
 - (Class)classFromKey:(NSString *)key {
     return [self.classMappings objectForKey:key] != nil ? 
@@ -65,11 +73,23 @@
     nil;
 }
 - (void)preProcBlock:(id (^)(id))block forPropClass:(Class)class {
-    [self.propBlockMappings setValue:block
+    [self.preProcBlockMappings setValue:block
                               forKey:NSStringFromClass(class)];
 }
-- (id)processProperty:(id)property ofClass:(Class)class {
-    id (^block)(id) = [self.propBlockMappings objectForKey:NSStringFromClass(class)];
+- (void)postProcBlock:(id (^)(id))block forPropClass:(Class)class {
+    [self.postProcBlockMappings setValue:block
+                                  forKey:NSStringFromClass(class)];
+}
+- (id)preProcessProperty:(id)property ofClass:(Class)class {
+    id (^block)(id) = [self.preProcBlockMappings objectForKey:NSStringFromClass(class)];
+    if (block) {
+        return block(property);
+    }
+    
+    return property;
+}
+- (id)postProcessProperty:(id)property ofClass:(Class)class {
+    id (^block)(id) = [self.postProcBlockMappings objectForKey:NSStringFromClass(class)];
     if (block) {
         return block(property);
     }

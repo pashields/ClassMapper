@@ -19,13 +19,17 @@
 @end
 @implementation NSObject (ClassMapper)
 - (NSDictionary *)_cm_serialize {
-    NSArray *propSet = [[self _cm_properties] allKeys];
+    NSDictionary *propToAttr = [self _cm_properties];
     
-    NSMutableDictionary *serialized = [NSMutableDictionary dictionaryWithCapacity:[propSet count]];
+    NSMutableDictionary *serialized = [NSMutableDictionary dictionaryWithCapacity:[propToAttr count]];
     
     /* propName is strong in case we need to change it */
-    for (__strong NSString *propName in propSet) {
+    for (__strong NSString *propName in propToAttr) {
         id<Serializable> prop = [self valueForKey:propName];
+        Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:propName]
+                                               withKey:propName];
+        prop = [[MapperConfig sharedInstance] postProcessProperty:prop
+                                                          ofClass:propClass];
         propName = [[MapperConfig sharedInstance] _trueKey:propName];
         [serialized setValue:[prop _cm_serialize] forKey:propName];
     }
@@ -53,7 +57,7 @@
     NSArray *classKeys = [propToAttr allKeys];
     
     /* key is strong so we can swap it if need be */
-    for (__strong NSString *key in [serialized allKeys]) {
+    for (__strong NSString *key in serialized) {
         /* The value */
         id val = [serialized objectForKey:key];
         /* Update the key according to config, might swap */
@@ -71,8 +75,8 @@
         /* Get class specified by property */
         Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:key] withKey:key];
         /* Update val if we have a preproc block */
-        val = [[MapperConfig sharedInstance] processProperty:val
-                                                     ofClass:propClass];
+        val = [[MapperConfig sharedInstance] preProcessProperty:val
+                                                        ofClass:propClass];
         
         /* Create the instance, by Mappable protocol if possible */
         if (![self valueForKey:key]) {            
