@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name     = 'ClassMapper'
   s.version  = '0.0.1'
-  s.license  = 'MIT'
+  s.license  = 'BSD'
   s.summary  = 'Simple and extensible mapping between your classes and NSDictionary'
   s.author   = { 'Pat Shields' => 'yeoldefortran@gmail.com' }
   s.homepage = 'https://github.com/pashields/ClassMapper'
