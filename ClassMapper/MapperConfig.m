@@ -17,15 +17,15 @@
     NSMutableDictionary *preProcBlockMappings_;
     NSMutableDictionary *postProcBlockMappings_;
 }
-@property(nonatomic, strong)NSMutableDictionary *classMappings;
-@property(nonatomic, strong)NSMutableDictionary *propNameMappings;
+@property(nonatomic, strong)NSMutableDictionary *mutableClassMappings;
+@property(nonatomic, strong)NSMutableDictionary *mutablePropNameMappings;
 @property(nonatomic, strong)NSMutableDictionary *preProcBlockMappings;
 @property(nonatomic, strong)NSMutableDictionary *postProcBlockMappings;
 @end
 
 @implementation MapperConfig
-@synthesize classMappings=classMappings_;
-@synthesize propNameMappings=propNameMappings_;
+@synthesize mutableClassMappings=classMappings_;
+@synthesize mutablePropNameMappings=propNameMappings_;
 @synthesize preProcBlockMappings=preProcBlockMappings_;
 @synthesize postProcBlockMappings=postProcBlockMappings_;
 
@@ -49,27 +49,27 @@
     return self;
 }
 - (void)mapKey:(NSString *)key toClass:(Class)class {
-    [self.classMappings setObject:class forKey:key];
+    [self.mutableClassMappings setObject:class forKey:key];
 }
 - (NSDictionary *)classMappings {
-    return classMappings_;
+    return self.mutableClassMappings;
 }
 - (void)mapPropertyName:(NSString *)name toOtherName:(NSString *)other {
-    [self.propNameMappings setObject:name forKey:other];
-    [self.propNameMappings setObject:other forKey:name];
+    [self.mutablePropNameMappings setObject:name forKey:other];
+    [self.mutablePropNameMappings setObject:other forKey:name];
 }
 - (NSDictionary *)propertyMappings {
-    return propNameMappings_;
+    return self.mutablePropNameMappings;
 }
 - (void)clearConfig {
-    self.classMappings = [NSMutableDictionary dictionary];
-    self.propNameMappings = [NSMutableDictionary dictionary];
+    self.mutableClassMappings = [NSMutableDictionary dictionary];
+    self.mutablePropNameMappings = [NSMutableDictionary dictionary];
     self.preProcBlockMappings = [NSMutableDictionary dictionary];
     self.postProcBlockMappings = [NSMutableDictionary dictionary];
 }
 - (Class)classFromKey:(NSString *)key {
-    return [self.classMappings objectForKey:key] != nil ? 
-    [self.classMappings objectForKey:key] :
+    return [self.mutableClassMappings objectForKey:key] != nil ? 
+    [self.mutableClassMappings objectForKey:key] :
     nil;
 }
 - (void)preProcBlock:(id (^)(id))block forPropClass:(Class)class {
@@ -100,7 +100,7 @@
 #pragma mark protected
 /* Give us the mapped key, else the original */
 - (NSString *)_trueKey:(NSString *)key {
-    NSString *potKey = [self.propNameMappings objectForKey:key];
+    NSString *potKey = [self.mutablePropNameMappings objectForKey:key];
     return potKey ? potKey : key;
 }
 @end

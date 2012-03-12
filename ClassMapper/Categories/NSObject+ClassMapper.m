@@ -95,6 +95,8 @@
     return self;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 + (Class)classFromAttribute:(NSString *)attr withKey:(NSString *)key {
     if ([attr hasPrefix:@"T@,"]) {
         if (LOG_ID_OBJ) {
@@ -117,4 +119,5 @@
         return attrClass;
     }
 }
+#pragma clang diagnostic pop
 @end
