@@ -113,7 +113,7 @@
 }
 
 + (Class)classWithAttributeClass:(Class)attrClass andAttrKey:(NSString *)key {
-    if ([ClassMapper _descClass:attrClass isKindOf:[NSArray class]]) {
+    if ([attrClass isSubclassOfClass:[NSArray class]]) {
         return [[MapperConfig sharedInstance] classFromKey:key];
     } else {
         return attrClass;

@@ -558,16 +558,6 @@
                          foo.aBar.aString, fooCopy.aBar.aString);
 }
 
-#pragma mark runtime tests
-- (void)testRuntime {
-    STAssertTrue([ClassMapper _descClass:[NSMutableArray class] isKindOf:[NSArray class]], 
-                 @"NSMutableArray is not considered a subclass of NSArray");
-    STAssertFalse([ClassMapper _descClass:[NSArray class] isKindOf:[NSMutableArray class]], 
-                 @"NSArray is considered a subclass of NSMutableArray");
-    STAssertTrue([ClassMapper _descClass:[NSMutableArray class] isKindOf:[NSObject class]], 
-                 @"NSMutableArray is not considered a subclass of NSObject");
-}
-
 #pragma mark key <-> key mapping test 
 - (void)testKeyNameMapping {
     [[MapperConfig sharedInstance] mapPropertyName:@"aString" toOtherName:@"a_string"];

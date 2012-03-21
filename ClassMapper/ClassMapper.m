@@ -49,21 +49,4 @@
 + (id)serialize:(id<Serializable>)object {
     return [object _cm_serialize];
 }
-
-#pragma mark helper
-/*
- * This method functions similarly to isKindOfClass, but on class objects.
- */
-+ (BOOL)_descClass:(Class)desc isKindOf:(Class)parent {
-    Class current = desc;
-    Class last;
-    do {
-        if (current == parent) {
-            return true;
-        }
-        last = current;
-        current = class_getSuperclass(current);
-    } while (last != current);
-    return FALSE;
-}
 @end

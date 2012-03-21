@@ -41,6 +41,4 @@
  * object to implement the serializable protocol, or be KVC compliant.
  */
 + (id)serialize:(id<Serializable>)obj;
-#pragma mark protected
-+ (BOOL)_descClass:(Class)desc isKindOf:(Class)parent;
 @end
