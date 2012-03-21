@@ -158,6 +158,17 @@
     
     STAssertTrue(zip.aDict == (NSDictionary *)[NSNull null], @"Failure to deserialize NSNull when null is in for dict.");
 }
+
+#pragma mark array to simple array
+- (void)testSimpleArrayToSimpleArray {
+    /* ["foo"] -> ["foo"] */
+    NSArray *ray = [NSArray arrayWithObject:@"foo"];
+    
+    NSArray *rayCopy = [ClassMapper deserialize:ray toClass:[NSArray class]];
+    
+    STAssertEqualObjects([ray lastObject], [rayCopy lastObject], @"Simple array deserialization fails");
+}
+
 #pragma mark array to classarray
 - (void)testArrayToArray {
     /* [{"aString":"MOTORHEAD"}, {"aString":"BLACK SABBATH"}] -> [Bar, Bar] */

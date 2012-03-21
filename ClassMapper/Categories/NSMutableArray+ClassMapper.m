@@ -20,6 +20,11 @@
     }
     [self removeAllObjects];
     for (id cereal in serialized) {
+        /* Generally, we want to chain class types. If someone has clearly specified
+           the type of the container, however, we want to break the chain. */
+        if ([class isSubclassOfClass:[NSArray class]]) {
+            class = nil;
+        }
         class = FIRST_NOT_NULL(instanceClass, class, [cereal class], nil);
         [self addObject:[ClassMapper deserialize:cereal toClass:class]];
     }
