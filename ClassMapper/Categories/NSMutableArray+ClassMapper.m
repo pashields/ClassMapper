@@ -13,6 +13,12 @@
 #define FIRST_NOT_NULL(x,y,z,a) (x?x:(y?y:(z?z:a)))
 
 @implementation NSMutableArray (ClassMapper)
+/* Class determination rules:
+ - If the array is not empty, we will look at the class of an 
+   element in the array and assume that is the class.
+ - If the class passed in the withClass arg is not NSArray, we will use that.
+ - Otherwise, we will default to the type of the serialized data.
+ */
 - (NSMutableArray *)_cm_update_with:(NSArray *)serialized withClass:(Class)class {
     Class instanceClass;
     if (!class && [self count] > 0) {

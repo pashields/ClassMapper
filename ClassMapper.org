@@ -16,11 +16,10 @@
 ** TODO Document debug options
 ** TODO Setup appledoc
 ** TODO Figure out a better solution to the arrays of serialized objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
-* Categories to bundle
-** TODO Set
-** TODO Boolean
+** TODO Remove the mapper config singleton. There is still probably a singleton involved in this, but we need to have a simpler way to support interacting with multiple services that may have conflicting mapper configs.
 
 * KVC edge cases to investigate
-** TODO Figure out if one -> many relationships are any different for us.
+** DONE Figure out if one -> many relationships are any different for us.
+*** They are. They are also nasty from our perspective. That being said, supporting them is more or less necessary to make classmapper work easily with core data. This is something to hack on soon.
 
-Should we be using a MapperConfig singelton? What if you are communicating with multiple conflicting services. Might be worth it to see if there is a zero-friction way to remove that dependency.
+
