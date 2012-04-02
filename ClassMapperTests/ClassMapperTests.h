@@ -16,6 +16,7 @@
 #import "Serializable.h"
 #import "DateHolder.h"
 #import "IdHolder.h"
+#import "BarSubClass.h"
 
 @interface ClassMapperTests : SenTestCase
 

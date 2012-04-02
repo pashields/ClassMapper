@@ -159,6 +159,15 @@
     STAssertTrue(zip.aDict == (NSDictionary *)[NSNull null], @"Failure to deserialize NSNull when null is in for dict.");
 }
 
+- (void)testSubClass {
+    /* {"aString":@"foo"} -> BarSubClass */
+    NSDictionary *dict  = [NSDictionary dictionaryWithObject:@"foo" forKey:@"aString"];
+    
+    BarSubClass *barsc = [ClassMapper deserialize:dict toClass:[BarSubClass class]];
+    
+    STAssertEquals(@"foo", barsc.aString, @"Deserialization is superclass properties not working");
+}
+
 #pragma mark array to simple array
 - (void)testSimpleArrayToSimpleArray {
     /* ["foo"] -> ["foo"] */

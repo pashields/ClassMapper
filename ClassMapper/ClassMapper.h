@@ -19,6 +19,7 @@
 
 #define LOG_KEY_MISSING NO
 #define LOG_ID_OBJ YES
+#define LOG_UNREADABLE_KEY NO
 @protocol Serializable;
 @protocol Mappable;
 

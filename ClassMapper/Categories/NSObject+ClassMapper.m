@@ -37,17 +37,21 @@
     return serialized;
 }
 - (NSDictionary *)_cm_properties {
-    unsigned int outCount;
-    objc_property_t *properties = class_copyPropertyList([self class], &outCount);
     NSMutableDictionary *propToAttr = [NSMutableDictionary dictionary];
-    for (int i=0; i<outCount; i++) {
-        objc_property_t property = properties[i];
-        NSString *propName = [NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding];
-        NSString *propAttr = [NSString stringWithCString:property_getAttributes(property) encoding:NSASCIIStringEncoding];
-        [propToAttr setValue:propAttr forKey:propName];
+    Class currentClass = [self class];
+    while (currentClass != [NSObject class]) {
+        unsigned int outCount;
+        objc_property_t *properties = class_copyPropertyList(currentClass, &outCount);
+        for (int i=0; i<outCount; i++) {
+            objc_property_t property = properties[i];
+            NSString *propName = [NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding];
+            NSString *propAttr = [NSString stringWithCString:property_getAttributes(property) encoding:NSASCIIStringEncoding];
+            [propToAttr setValue:propAttr forKey:propName];
+        }
+        
+        free(properties);
+        currentClass = [currentClass superclass];
     }
-    
-    free(properties);
     
     return propToAttr;
 }
@@ -104,8 +108,9 @@
         }
         return [NSObject class];
     } else if (![attr hasPrefix:@"T@\""]) {
-        [NSException raise:@"Cannot determine class of sub-object" 
-                    format:@"Cannot map sub-object with format: %@", attr];
+        if (LOG_UNREADABLE_KEY) {
+            NSLog(@"Warning: Cannot map sub-object with format: %@", attr);
+        }
     }
     
     NSArray *components = [attr componentsSeparatedByString:@"\""];
