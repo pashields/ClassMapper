@@ -1,20 +1,5 @@
 * Tasks
-** DONE Evaluate last checkin, push if complete.
-** DONE Push new documentation.
-** DONE Move private methods into anonymous category.
-** DONE Add ability to write a global preproc for dict: toClass:.
-** DONE Add debug options for things like incomplete models.
-** DONE Remove preprocblock
-** DONE Switch from Class based mapping to instance based.
-** DONE Update Readme with new examples
-** DONE Remove preProcBlock documentation
-** DONE Add a way to map remote key names to locals (not sure if this should be local or global).
-** DONE Add notes to wiki about bootstrapping mappings via plist.
-** DONE Add custom deserialization routines for mutability issues at least.
-** DONE Document and/or design date handling.
-
 ** TODO Document debug options
-** TODO Setup appledoc
 ** TODO Figure out a better solution to the arrays of serialized objects problem. The MapperConfig system is infinitely less than ideal, but does the job in simple cases. If a better solution cannot be found, there needs to be a way to override the MapperConfig for certain calls.
 ** TODO Remove the mapper config singleton. There is still probably a singleton involved in this, but we need to have a simpler way to support interacting with multiple services that may have conflicting mapper configs.
 

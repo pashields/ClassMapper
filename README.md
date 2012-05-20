@@ -1,6 +1,6 @@
 ClassMapper
 ===========
-ClassMapper is a simple obj-c library for converting classes which follow Key-Value Coding (KVC) conventions to NSDictionaries and back. It was inspired by [RestKit](https://github.com/RestKit/RestKit), which contains similar functionality. But where RestKit most certainly falls on the framework side of things, ClassMapper is meant to be used in connection with other libraries. It's a little trifle of code you would have written yourself, but now we can all share one version.
+`ClassMapper` is a simple obj-c library for converting classes which follow Key-Value Coding (KVC) conventions to other objects. By convention, these objects are `Foundation` objects, such as `NSDictionary` and `NSArray`. It is highly extensible, with just enough batteries included to do your average JSON -> Model conversion. It was inspired by [RestKit](https://github.com/RestKit/RestKit), which contains similar functionality. But where RestKit most certainly falls on the framework side of things, ClassMapper is meant to be used in connection with other libraries. It's a little trifle of code you would have written yourself, but now we can all share one version.
 
 In the immortal words of [Stuart Sierra](https://twitter.com/#!/stuartsierra/statuses/20306437438): write libraries, not frameworks.
 

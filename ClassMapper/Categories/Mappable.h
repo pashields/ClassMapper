@@ -7,22 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-/*
- * Must be implemented by any (non-KVC) class that will exist in the
- * output of a ClassMapper deserialize operation.
+/**
+ The `Mappable` protocol must be implemented by any class that wants custom deserialization.
+ 
+ This should only be necessary for non-kvc compliant classes.
  */
 @protocol Mappable
 @optional
-/*
- * Update the instance with the data in serialized. If any extra
- * class information has been deduced higher up the tree, it will
- * be passed to the withClass arguement.
+/**
+ Called when this instance should be updated with new data. This should mutate the instance.
+ 
+ @param serialized The serialized data that should be used to fill the instance.
+ @param class A class hint. This can be used in cases where the class is ambiguous, such as filling a collection.
+ 
+ @return the updated instance.
  */
 - (id)_cm_update_with:(id)serialized withClass:(Class)class;
-/*
- * Override on classes that require non-standard (not [class new])
- * instantiation before mapping. This is most commonly used to handle
- * immutable classes. See NSArray+ClassMapper.
+/**
+ Called when a new instance of class must be created using the serialized data.
+ 
+ @param serialized The serialized data that the new instance will contain.
+ @param class A class hint. This can be used in cases where the class is ambiguous, such as filling a collection.
+ 
+ @return the new instance.
  */
 + (id)_cm_inst_from:(id)serialized withClass:(Class)class;
 @end
