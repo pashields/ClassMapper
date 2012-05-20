@@ -89,8 +89,8 @@
 		848C2432148BE9CA001859C8 /* libClassMapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libClassMapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C2435148BE9CA001859C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		848C2439148BE9CA001859C8 /* ClassMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassMapper-Prefix.pch"; sourceTree = "<group>"; };
-		848C243A148BE9CA001859C8 /* ClassMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMapper.h; sourceTree = "<group>"; };
-		848C243B148BE9CA001859C8 /* ClassMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassMapper.m; sourceTree = "<group>"; };
+		848C243A148BE9CA001859C8 /* ClassMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClassMapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		848C243B148BE9CA001859C8 /* ClassMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClassMapper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		848C2442148BE9CA001859C8 /* ClassMapperTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassMapperTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848C2443148BE9CA001859C8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		848C2445148BE9CA001859C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
