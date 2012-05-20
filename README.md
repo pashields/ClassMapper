@@ -43,7 +43,7 @@ Check out MapperConfig options on the [wiki](https://github.com/pashields/ClassM
 
 Usage
 ------
-ClassMapper officially supports [CocoaPods](https://github.com/CocoaPods/CocoaPods). We aren't hosted there yet, but once we reach 0.1.0, we can submit.
+ClassMapper officially supports [CocoaPods](https://github.com/CocoaPods/CocoaPods). You'll find our spec in the repo.
 
 You can also add ClassMapper manually, either as source or (preferably) a static library. It is important to note two things:
 
