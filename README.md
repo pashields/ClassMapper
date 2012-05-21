@@ -59,3 +59,7 @@ For more info, you can look at the ClassMapper.org file (emacs org-mode).
 License
 -------
 BSD, to the max. See LICENSE file for the details.
+
+Similar Projects
+----------------
+* [KeyValueObjectMapping](https://github.com/dchohfi/KeyValueObjectMapping) is a more convention over configuration system. I haven't dug too far into it, but it looks like a more batteries-included but less extensible approach. It's also available on cocoapods.
