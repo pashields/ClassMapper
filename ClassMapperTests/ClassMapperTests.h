@@ -24,6 +24,7 @@
 #import "DateHolder.h"
 #import "IdHolder.h"
 #import "BarSubClass.h"
+#import "PrimitiveHolder.h"
 
 @interface ClassMapperTests : SenTestCase
 

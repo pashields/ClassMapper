@@ -176,6 +176,21 @@
     STAssertEquals(@"foo", barsc.aString, @"Deserialization is superclass properties not working");
 }
 
+- (void)testDictToObjWithPrimatives {
+    /* {"intValue":1, "doubleValue":1, "longValue":1, "floatValue":1} -> Primitive Holder */
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:1], @"intValue", 
+                          [NSNumber numberWithInt:1], @"doubleValue", 
+                          [NSNumber numberWithInt:1], @"longValue", 
+                          [NSNumber numberWithInt:1], @"floatValue", nil];
+    
+    PrimitiveHolder *holder = [ClassMapper deserialize:dict toClass:[PrimitiveHolder class]];
+    
+    STAssertEquals(holder.intValue, 1, @"Cannot deserialize into an int");
+    STAssertEquals(holder.doubleValue, 1.0, @"Cannot deserialize into an double");
+    STAssertEquals(holder.longValue, 1L, @"Cannot deserialize into an long");
+    STAssertEquals(holder.floatValue, 1.0f, @"Cannot deserialize into an double");
+}
+
 #pragma mark array to simple array
 - (void)testSimpleArrayToSimpleArray {
     /* ["foo"] -> ["foo"] */
@@ -573,6 +588,22 @@
                          [foo.aBar class], [fooCopy.aBar class]);
     STAssertEqualObjects(foo.aBar.aString, fooCopy.aBar.aString, @"Nested objs do not match. original: %@, copy: %@", 
                          foo.aBar.aString, fooCopy.aBar.aString);
+}
+- (void)testSerializeObjWithPrimatives {
+    PrimitiveHolder *holder = [PrimitiveHolder new];
+    holder.intValue = 1;
+    holder.doubleValue = 1;
+    holder.longValue = 1;
+    holder.floatValue = 1;
+    
+    NSDictionary *dict = [ClassMapper serialize:holder];
+    
+    PrimitiveHolder *copy = [ClassMapper deserialize:dict toClass:[PrimitiveHolder class]];
+    
+    STAssertEquals(holder.intValue, copy.intValue, @"Cannot serialize ints");
+    STAssertEquals(holder.doubleValue, copy.doubleValue, @"Cannot serialize dobules");
+    STAssertEquals(holder.longValue, copy.longValue, @"Cannot serialize longss");
+    STAssertEquals(holder.floatValue, copy.floatValue, @"Cannot serialize floats");
 }
 
 #pragma mark key <-> key mapping test 

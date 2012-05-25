@@ -121,6 +121,11 @@
     }
     
     NSArray *components = [attr componentsSeparatedByString:@"\""];
+    
+    /* This is not an object */
+    if ([components count] == 1) {
+        return nil;
+    }
     return NSClassFromString([components objectAtIndex:1]);
 }
 
