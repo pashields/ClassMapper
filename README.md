@@ -54,6 +54,8 @@ Status
 ------
 I've used ClassMapper across a number of projects and am fairly happy with it. There are a few things that we need to add support for, but if ClassMapper suits your needs now, I doubt there will be significant enough changes to the API that you will need to make big changes to your own code.
 
+While we don't have 100% test coverage, the library is extensively tested. The test/code ratio is usually around 1:1, often favoring tests.
+
 For more info, you can look at the ClassMapper.org file (emacs org-mode).
 
 License
