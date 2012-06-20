@@ -643,6 +643,23 @@
     
     STAssertEquals(978307200.0, [dateHolder.date timeIntervalSince1970], @"Mapping to a date doesn't work");
 }
+- (void)testStringToDateFromSubclass {
+    if (EXACT_CLASS_MATCH) {
+        STFail(@"This test requires the EXACT_CLASS_MATCH macro to be NO");
+        return;
+    }
+    
+    [[MapperConfig sharedInstance] preProcBlock:^id(id propertyValue) {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd zzz"];
+        return [df dateFromString:propertyValue];
+    } forPropClass:[NSObject class]];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"2001-01-01 GMT" forKey:@"date"];
+    DateHolder *dateHolder = [ClassMapper deserialize:dict toClass:[DateHolder class]];
+    
+    STAssertEquals(978307200.0, [dateHolder.date timeIntervalSince1970], @"Preproc on subclass doesn't");
+}
 #pragma mark property postproc blocks
 - (void)testNumberToString {
     [[MapperConfig sharedInstance] postProcBlock:^id(id propertyValue) {
@@ -662,6 +679,25 @@
         [df setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
         return [df stringFromDate:propertyValue];
     } forPropClass:[NSDate class]];
+    
+    DateHolder *dateHolder = [DateHolder new];
+    dateHolder.date = [NSDate dateWithTimeIntervalSince1970:978307200.0];
+    
+    NSDictionary *dict = [ClassMapper serialize:dateHolder];
+    STAssertEqualObjects(@"2001-01-01 GMT", [dict objectForKey:@"date"], @"Post Processing on a date doesn't work");
+}
+- (void)testDateToStringFromSubclass {
+    if (EXACT_CLASS_MATCH) {
+        STFail(@"This test requires the EXACT_CLASS_MATCH macro to be NO");
+        return;
+    }
+    
+    [[MapperConfig sharedInstance] postProcBlock:^id(id propertyValue) {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd zzz"];
+        [df setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        return [df stringFromDate:propertyValue];
+    } forPropClass:[NSObject class]];
     
     DateHolder *dateHolder = [DateHolder new];
     dateHolder.date = [NSDate dateWithTimeIntervalSince1970:978307200.0];

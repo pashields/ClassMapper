@@ -15,6 +15,11 @@
 //
 #import <Foundation/Foundation.h>
 
+/**
+ Determines whether post and pre-proc blocks will run on subclasses. If set to `YES`, the blocks will only run on the specified class. If set to `NO`, the block will run on subclasses.
+ */
+#define EXACT_CLASS_MATCH NO
+
 typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
 
 /**
@@ -85,7 +90,7 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
 - (Class)classFromKey:(NSString *)key;
 
 /**
- Sets the block to be run on the serialized version of any property of a given class.
+ Sets the block to be run on the serialized version of any property of a given class. If the `EXACT_CLASS_MATCH` macro is set to `NO`, all properties that are subclasses of the given class will also be processed by the block. Otherwise, only properties with the exact same class will be processed.
  
  @param block A block that takes the serialized data and returns a value that will deserialize into an object of class `class`.
  @param class The class that will be processed using the block.
@@ -93,7 +98,7 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
 - (void)preProcBlock:(id (^)(id propertyValue))block forPropClass:(Class)class;
 
 /**
- Sets the block to be run on the deserialized version of any property of a given class.
+ Sets the block to be run on the deserialized version of any property of a given class. If the `EXACT_CLASS_MATCH` macro is set to `NO`, all properties that are subclasses of the given class will also be processed by the block. Otherwise, only properties with the exact same class will be processed.
  
  @param block A block that takes an object of class `class` and returns a serializeable version of that object.
  @param class The class that will be processed using the block.

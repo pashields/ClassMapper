@@ -88,17 +88,29 @@
                                   forKey:NSStringFromClass(class)];
 }
 - (id)preProcessProperty:(id)property ofClass:(Class)class {
-    id (^block)(id) = [self.preProcBlockMappings objectForKey:NSStringFromClass(class)];
-    if (block) {
-        return block(property);
-    }
-    
-    return property;
+    return [self processProperty:property ofClass:class withBlockDict:self.preProcBlockMappings];
 }
 - (id)postProcessProperty:(id)property ofClass:(Class)class {
-    id (^block)(id) = [self.postProcBlockMappings objectForKey:NSStringFromClass(class)];
-    if (block) {
-        return block(property);
+    return [self processProperty:property ofClass:class withBlockDict:self.postProcBlockMappings];
+}
+- (id)processProperty:(id)property ofClass:(Class)class withBlockDict:(NSDictionary *)blockDict {
+    id (^block)(id);
+    NSString *classString = NSStringFromClass(class);
+    
+    if (EXACT_CLASS_MATCH) {
+        block = [blockDict objectForKey:classString];
+        if (block) {
+            property = block(property);
+        }
+    } else {
+        for (NSString *blockClassString in [blockDict allKeys]) {
+            Class blockClass = objc_getClass([blockClassString cStringUsingEncoding:NSUTF8StringEncoding]);
+            if ([class isSubclassOfClass:blockClass] || 
+                [classString isEqualToString:blockClassString]) {
+                block = [blockDict objectForKey:blockClassString];
+                property = block(property);
+            }
+        }
     }
     
     return property;
