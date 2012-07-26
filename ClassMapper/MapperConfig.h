@@ -27,7 +27,13 @@ typedef NSDictionary*(^PreProcBlock)(NSDictionary*);
  
  For examples and more information on configuring `MapperConfig`, see the `ClassMapper` [wiki on github](https://github.com/pashields/ClassMapper/wiki/Configuration-Options).
  */
-@interface MapperConfig : NSObject 
+@interface MapperConfig : NSObject
+/**
+ Determines whether to include `NSNull` values in when serializing.
+ 
+ If set to `YES`, then `[NSNull null]` inserted into any dictionary where the source object contained a `nil`.
+ */
+@property(nonatomic, assign)BOOL includeNullValues;
 /**
  Used to access a singleton of the mapperconfig.
  

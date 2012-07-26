@@ -606,6 +606,24 @@
     STAssertEquals(holder.floatValue, copy.floatValue, @"Cannot serialize floats");
 }
 
+- (void)testSerializeNotIncludingNulls {
+    Foo *foo = [Foo new];
+    
+    [MapperConfig sharedInstance].includeNullValues = NO;
+    
+    NSDictionary *dict = [ClassMapper serialize:foo];
+    STAssertNil([dict objectForKey:@"aString"], @"Nulls being included when they should not");
+}
+
+- (void)testSerializeIncludingNulls {
+    Foo *foo = [Foo new];
+    
+    [MapperConfig sharedInstance].includeNullValues = YES;
+    
+    NSDictionary *dict = [ClassMapper serialize:foo];
+    STAssertEquals([NSNull null], [dict objectForKey:@"aString"], @"Nulls not being included");
+}
+
 #pragma mark key <-> key mapping test 
 - (void)testKeyNameMapping {
     [[MapperConfig sharedInstance] mapPropertyName:@"aString" toOtherName:@"a_string"];

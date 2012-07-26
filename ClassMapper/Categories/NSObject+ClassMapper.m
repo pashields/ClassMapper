@@ -38,6 +38,11 @@
         prop = [[MapperConfig sharedInstance] postProcessProperty:prop
                                                           ofClass:propClass];
         propName = [[MapperConfig sharedInstance] _trueKey:propName];
+        
+        if ([MapperConfig sharedInstance].includeNullValues && prop == nil) {
+            prop = [NSNull null];
+        }
+        
         [serialized setValue:[prop _cm_serialize] forKey:propName];
     }
     

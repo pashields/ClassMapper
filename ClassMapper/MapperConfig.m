@@ -23,6 +23,7 @@
     NSMutableDictionary *propNameMappings_;
     NSMutableDictionary *preProcBlockMappings_;
     NSMutableDictionary *postProcBlockMappings_;
+    BOOL includeNullValues_;
 }
 @property(nonatomic, strong)NSMutableDictionary *mutableClassMappings;
 @property(nonatomic, strong)NSMutableDictionary *mutablePropNameMappings;
@@ -31,6 +32,7 @@
 @end
 
 @implementation MapperConfig
+@synthesize includeNullValues=includeNullValues_;
 @synthesize mutableClassMappings=classMappings_;
 @synthesize mutablePropNameMappings=propNameMappings_;
 @synthesize preProcBlockMappings=preProcBlockMappings_;
