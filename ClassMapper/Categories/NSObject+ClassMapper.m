@@ -98,8 +98,12 @@
         if (![self valueForKey:key]) {            
             Class toClass = [NSObject classWithAttributeClass:propClass andAttrKey:key];
             
-            [self setValue:[ClassMapper deserialize:val toClass:toClass]
-                    forKey:key];
+            if (toClass == nil) { // Property is id, do not recurse
+                [self setValue:val forKey:key];
+            } else {
+                [self setValue:[ClassMapper deserialize:val toClass:toClass]
+                        forKey:key];
+            }
         } else {
             /* Update existing instance */
             id subInst = [self valueForKey:key];
@@ -118,7 +122,7 @@
         if (LOG_ID_OBJ) {
             NSLog(@"Warning: Property %@ appears to be of type id", key);
         }
-        return [NSObject class];
+        return nil;
     } else if (![attr hasPrefix:@"T@\""]) {
         if (LOG_UNREADABLE_KEY) {
             NSLog(@"Warning: Cannot map sub-object with format: %@", attr);

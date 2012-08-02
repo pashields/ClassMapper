@@ -191,6 +191,17 @@
     STAssertEquals(holder.floatValue, 1.0f, @"Cannot deserialize into an double");
 }
 
+- (void)testDictToObjWithId {
+    NSDictionary *dict = @{ @"stuff" : @{ @"foo" : @{ @"aNumber" : @1 } } };
+    
+    [[MapperConfig sharedInstance] mapKey:@"foo" toClass:[Foo class]];
+    
+    IdHolder *holder = [ClassMapper deserialize:dict toClass:[IdHolder class]];
+    
+    STAssertFalse([[holder.stuff valueForKey:@"foo"] isKindOfClass:[Foo class]], @"Propertys with type id are being recursed into");
+    STAssertEqualObjects([[holder.stuff valueForKey:@"foo"] valueForKey:@"aNumber"], @1, @"Propertys with type id are being recursed into");
+}
+
 #pragma mark array to simple array
 - (void)testSimpleArrayToSimpleArray {
     /* ["foo"] -> ["foo"] */
