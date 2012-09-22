@@ -43,7 +43,7 @@
             prop = [NSNull null];
         }
         
-        [serialized setValue:[prop _cm_serialize] forKey:propName];
+        [serialized setValue:[ClassMapper serialize:prop] forKey:propName];
     }
     
     return serialized;
