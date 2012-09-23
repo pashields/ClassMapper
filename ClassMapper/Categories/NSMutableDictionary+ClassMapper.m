@@ -28,9 +28,10 @@
  - Otherwise, we will default to the type of the serialized data.
  */
 - (NSDictionary *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class {
-    /* Because of class clusters, we have to handle both the mutable and immutable cases here */
+    /* Because of class clusters (on iOS 5), we have to handle both the mutable and immutable cases here */
     if ([self classForCoder] == [NSDictionary class]) {
         for (NSString *key in serialized) {
+            NSAssert([self objectForKey:key] != nil, @"Cannot add an entry to an immutable NSDictionary");
             id instance = [self valueForKey:key];
             [instance _cm_update_with:[serialized objectForKey:key] 
                             withClass:[[MapperConfig sharedInstance] classFromKey:key]];

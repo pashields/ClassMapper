@@ -15,6 +15,7 @@
 //
 #import "NSDictionary+ClassMapper.h"
 #import "ClassMapper.h"
+#import "MapperConfig.h"
 
 @implementation NSDictionary (ClassMapper)
 - (NSDictionary *)_cm_serialize {
@@ -25,6 +26,16 @@
     }
     
     return copy;
+}
+- (NSDictionary *)_cm_update_with:(NSDictionary *)serialized withClass:(Class)class
+{
+    for (NSString *key in serialized) {
+        NSAssert([self objectForKey:key] != nil, @"Cannot add an entry to an immutable NSDictionary");
+        id instance = [self valueForKey:key];
+        [instance _cm_update_with:[serialized objectForKey:key]
+                        withClass:[[MapperConfig sharedInstance] classFromKey:key]];
+    }
+    return self;
 }
 + (NSDictionary *)_cm_inst_from:(NSDictionary *)serialized withClass:(Class)class {
     return [[NSMutableDictionary new] _cm_update_with:serialized withClass:class];
