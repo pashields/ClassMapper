@@ -27,6 +27,18 @@
 #define LOG_KEY_MISSING NO
 #define LOG_ID_OBJ YES
 #define LOG_UNREADABLE_KEY NO
+#define RUN_CONCURRENT 1
+
+#if RUN_CONCURRENT == 0
+#define CM_SAFE_WRITE_SETUP(queueName)
+#define CM_SAFE_WRITE(queueName, write) write
+#define CM_SAFE_WRITE_TEARDOWN(queueName)
+#elif RUN_CONCURRENT == 1
+#define CM_SAFE_WRITE_SETUP(queueName) dispatch_queue_t queueName = dispatch_queue_create(NULL, 0);
+#define CM_SAFE_WRITE(queueName, write) dispatch_sync(queueName, ^{write;});
+#define CM_SAFE_WRITE_TEARDOWN(queueName) dispatch_release(queueName);
+#endif
+
 @protocol Serializable;
 @protocol Mappable;
 
@@ -70,4 +82,7 @@
  @return the serialized representation of the object.
  */
 + (id)serialize:(id<Serializable>)obj;
+
++ (void)deserializeAsync:(id<Mappable>)serialized toClass:(Class)classType completion:(void(^)(id deserialized))completionBlock;
++ (void)serializeAsync:(id<Serializable>)obj completion:(void(^)(id serialized))completionBlock;
 @end

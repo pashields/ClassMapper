@@ -45,11 +45,35 @@
 		848C245F148BEA37001859C8 /* MapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C245D148BEA37001859C8 /* MapperConfig.m */; };
 		DA0EEEB514AB75C000DE91AA /* Bar.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2465148BEB19001859C8 /* Bar.m */; };
 		DA0EEEB614AB75C000DE91AA /* Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 848C2467148BEB19001859C8 /* Foo.m */; };
+		DA3E6CA5160F8DC0000FEA6C /* ClassMapperDispatchSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CA4160F8DC0000FEA6C /* ClassMapperDispatchSpec.m */; };
+		DA3E6CAC160FAA05000FEA6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848C2445148BE9CA001859C8 /* UIKit.framework */; };
+		DA3E6CAD160FAA05000FEA6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848C2435148BE9CA001859C8 /* Foundation.framework */; };
+		DA3E6CAF160FAA05000FEA6C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3E6CAE160FAA05000FEA6C /* CoreGraphics.framework */; };
+		DA3E6CB5160FAA05000FEA6C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3E6CB3160FAA05000FEA6C /* InfoPlist.strings */; };
+		DA3E6CB7160FAA05000FEA6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CB6160FAA05000FEA6C /* main.m */; };
+		DA3E6CBB160FAA05000FEA6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CBA160FAA05000FEA6C /* AppDelegate.m */; };
+		DA3E6CBD160FAA05000FEA6C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3E6CBC160FAA05000FEA6C /* Default.png */; };
+		DA3E6CBF160FAA05000FEA6C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3E6CBE160FAA05000FEA6C /* Default@2x.png */; };
+		DA3E6CC1160FAA05000FEA6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3E6CC0160FAA05000FEA6C /* Default-568h@2x.png */; };
+		DA3E6CC4160FAA05000FEA6C /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA3E6CC2160FAA05000FEA6C /* MainStoryboard.storyboard */; };
+		DA3E6CC7160FAA05000FEA6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CC6160FAA05000FEA6C /* ViewController.m */; };
+		DA3E6CE6160FAB6B000FEA6C /* BigScalarArrayBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CE5160FAB6B000FEA6C /* BigScalarArrayBenchmark.m */; };
+		DA3E6CE9160FACB9000FEA6C /* libClassMapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 848C2432148BE9CA001859C8 /* libClassMapper.a */; };
+		DA3E6CEC160FB17D000FEA6C /* BigObjectArrayBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CEB160FB17D000FEA6C /* BigObjectArrayBenchmark.m */; };
+		DA3E6CEF160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3E6CEE160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.m */; };
 		DA927F3D14E36F6900FD3401 /* DateHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = DA927F3C14E36F6900FD3401 /* DateHolder.m */; };
+		F00D687C5B31459AB5CDDFF2 /* libPods-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC4FC90FF5D4494F85E5C468 /* libPods-test.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		848C2448148BE9CA001859C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848C2429148BE9CA001859C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 848C2431148BE9CA001859C8;
+			remoteInfo = ClassMapper;
+		};
+		DA3E6CE7160FAB8D000FEA6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 848C2429148BE9CA001859C8 /* Project object */;
 			proxyType = 1;
@@ -90,13 +114,13 @@
 		84655A9914D0DAE400B9AD34 /* NSMutableArray+ClassMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+ClassMapper.m"; path = "Categories/NSMutableArray+ClassMapper.m"; sourceTree = "<group>"; };
 		84655AA014D1ED1C00B9AD34 /* Mappable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mappable.h; path = Categories/Mappable.h; sourceTree = "<group>"; };
 		848C2432148BE9CA001859C8 /* libClassMapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libClassMapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		848C2435148BE9CA001859C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		848C2435148BE9CA001859C8 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		848C2439148BE9CA001859C8 /* ClassMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassMapper-Prefix.pch"; sourceTree = "<group>"; };
 		848C243A148BE9CA001859C8 /* ClassMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClassMapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		848C243B148BE9CA001859C8 /* ClassMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClassMapper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		848C2442148BE9CA001859C8 /* ClassMapperTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassMapperTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		848C2443148BE9CA001859C8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		848C2445148BE9CA001859C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		848C2443148BE9CA001859C8 /* SenTestingKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		848C2445148BE9CA001859C8 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		848C244D148BE9CA001859C8 /* ClassMapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ClassMapperTests-Info.plist"; sourceTree = "<group>"; };
 		848C244F148BE9CA001859C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		848C2451148BE9CA001859C8 /* ClassMapperTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMapperTests.h; sourceTree = "<group>"; };
@@ -107,9 +131,33 @@
 		848C2465148BEB19001859C8 /* Bar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bar.m; sourceTree = "<group>"; };
 		848C2466148BEB19001859C8 /* Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foo.h; sourceTree = "<group>"; };
 		848C2467148BEB19001859C8 /* Foo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foo.m; sourceTree = "<group>"; };
+		B3B36F1DFB9747C3AA1DD078 /* Pods-test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.xcconfig"; path = "Pods/Pods-test.xcconfig"; sourceTree = SOURCE_ROOT; };
 		DA0690F914AAB52E006E4DFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		DA3E6CA4160F8DC0000FEA6C /* ClassMapperDispatchSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassMapperDispatchSpec.m; sourceTree = "<group>"; };
+		DA3E6CAA160FAA05000FEA6C /* ClassMapperBenchmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassMapperBenchmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3E6CAE160FAA05000FEA6C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DA3E6CB2160FAA05000FEA6C /* ClassMapperBenchmark-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ClassMapperBenchmark-Info.plist"; sourceTree = "<group>"; };
+		DA3E6CB4160FAA05000FEA6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA3E6CB6160FAA05000FEA6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DA3E6CB8160FAA05000FEA6C /* ClassMapperBenchmark-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassMapperBenchmark-Prefix.pch"; sourceTree = "<group>"; };
+		DA3E6CB9160FAA05000FEA6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DA3E6CBA160FAA05000FEA6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DA3E6CBC160FAA05000FEA6C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DA3E6CBE160FAA05000FEA6C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DA3E6CC0160FAA05000FEA6C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DA3E6CC3160FAA05000FEA6C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		DA3E6CC5160FAA05000FEA6C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DA3E6CC6160FAA05000FEA6C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DA3E6CE2160FAABD000FEA6C /* ClassMapperBenchmark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassMapperBenchmark.h; sourceTree = "<group>"; };
+		DA3E6CE4160FAB6B000FEA6C /* BigScalarArrayBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigScalarArrayBenchmark.h; sourceTree = "<group>"; };
+		DA3E6CE5160FAB6B000FEA6C /* BigScalarArrayBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigScalarArrayBenchmark.m; sourceTree = "<group>"; };
+		DA3E6CEA160FB17D000FEA6C /* BigObjectArrayBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigObjectArrayBenchmark.h; sourceTree = "<group>"; };
+		DA3E6CEB160FB17D000FEA6C /* BigObjectArrayBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigObjectArrayBenchmark.m; sourceTree = "<group>"; };
+		DA3E6CED160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigNestedObjectArrayBenchmark.h; sourceTree = "<group>"; };
+		DA3E6CEE160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigNestedObjectArrayBenchmark.m; sourceTree = "<group>"; };
 		DA927F3B14E36F6900FD3401 /* DateHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHolder.h; sourceTree = "<group>"; };
 		DA927F3C14E36F6900FD3401 /* DateHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHolder.m; sourceTree = "<group>"; };
+		EC4FC90FF5D4494F85E5C468 /* libPods-test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +177,18 @@
 				848C2446148BE9CA001859C8 /* UIKit.framework in Frameworks */,
 				848C2447148BE9CA001859C8 /* Foundation.framework in Frameworks */,
 				848C244A148BE9CA001859C8 /* libClassMapper.a in Frameworks */,
+				F00D687C5B31459AB5CDDFF2 /* libPods-test.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA3E6CA7160FAA05000FEA6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA3E6CE9160FACB9000FEA6C /* libClassMapper.a in Frameworks */,
+				DA3E6CAC160FAA05000FEA6C /* UIKit.framework in Frameworks */,
+				DA3E6CAD160FAA05000FEA6C /* Foundation.framework in Frameworks */,
+				DA3E6CAF160FAA05000FEA6C /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,9 +200,11 @@
 			children = (
 				848C2437148BE9CA001859C8 /* ClassMapper */,
 				848C244B148BE9CA001859C8 /* ClassMapperTests */,
+				DA3E6CB0160FAA05000FEA6C /* ClassMapperBenchmark */,
 				848C2434148BE9CA001859C8 /* Frameworks */,
 				848C2433148BE9CA001859C8 /* Products */,
 				DA0690F914AAB52E006E4DFF /* README.md */,
+				B3B36F1DFB9747C3AA1DD078 /* Pods-test.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +213,7 @@
 			children = (
 				848C2432148BE9CA001859C8 /* libClassMapper.a */,
 				848C2442148BE9CA001859C8 /* ClassMapperTests.octest */,
+				DA3E6CAA160FAA05000FEA6C /* ClassMapperBenchmark.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +224,8 @@
 				848C2435148BE9CA001859C8 /* Foundation.framework */,
 				848C2443148BE9CA001859C8 /* SenTestingKit.framework */,
 				848C2445148BE9CA001859C8 /* UIKit.framework */,
+				EC4FC90FF5D4494F85E5C468 /* libPods-test.a */,
+				DA3E6CAE160FAA05000FEA6C /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -195,6 +260,7 @@
 				848C2451148BE9CA001859C8 /* ClassMapperTests.h */,
 				848C2452148BE9CA001859C8 /* ClassMapperTests.m */,
 				848C244C148BE9CA001859C8 /* Supporting Files */,
+				DA3E6CA4160F8DC0000FEA6C /* ClassMapperDispatchSpec.m */,
 			);
 			path = ClassMapperTests;
 			sourceTree = "<group>";
@@ -256,6 +322,48 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		DA3E6CB0160FAA05000FEA6C /* ClassMapperBenchmark */ = {
+			isa = PBXGroup;
+			children = (
+				DA3E6CE3160FAB3D000FEA6C /* Benchmarks */,
+				DA3E6CB9160FAA05000FEA6C /* AppDelegate.h */,
+				DA3E6CBA160FAA05000FEA6C /* AppDelegate.m */,
+				DA3E6CC2160FAA05000FEA6C /* MainStoryboard.storyboard */,
+				DA3E6CC5160FAA05000FEA6C /* ViewController.h */,
+				DA3E6CC6160FAA05000FEA6C /* ViewController.m */,
+				DA3E6CB1160FAA05000FEA6C /* Supporting Files */,
+			);
+			path = ClassMapperBenchmark;
+			sourceTree = "<group>";
+		};
+		DA3E6CB1160FAA05000FEA6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA3E6CB2160FAA05000FEA6C /* ClassMapperBenchmark-Info.plist */,
+				DA3E6CB3160FAA05000FEA6C /* InfoPlist.strings */,
+				DA3E6CB6160FAA05000FEA6C /* main.m */,
+				DA3E6CB8160FAA05000FEA6C /* ClassMapperBenchmark-Prefix.pch */,
+				DA3E6CBC160FAA05000FEA6C /* Default.png */,
+				DA3E6CBE160FAA05000FEA6C /* Default@2x.png */,
+				DA3E6CC0160FAA05000FEA6C /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA3E6CE3160FAB3D000FEA6C /* Benchmarks */ = {
+			isa = PBXGroup;
+			children = (
+				DA3E6CE2160FAABD000FEA6C /* ClassMapperBenchmark.h */,
+				DA3E6CE4160FAB6B000FEA6C /* BigScalarArrayBenchmark.h */,
+				DA3E6CE5160FAB6B000FEA6C /* BigScalarArrayBenchmark.m */,
+				DA3E6CEA160FB17D000FEA6C /* BigObjectArrayBenchmark.h */,
+				DA3E6CEB160FB17D000FEA6C /* BigObjectArrayBenchmark.m */,
+				DA3E6CED160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.h */,
+				DA3E6CEE160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.m */,
+			);
+			name = Benchmarks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -307,6 +415,7 @@
 				848C243E148BE9CA001859C8 /* Frameworks */,
 				848C243F148BE9CA001859C8 /* Resources */,
 				848C2440148BE9CA001859C8 /* ShellScript */,
+				EFA77AEA86CA419694C2AB82 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -317,6 +426,24 @@
 			productName = ClassMapperTests;
 			productReference = 848C2442148BE9CA001859C8 /* ClassMapperTests.octest */;
 			productType = "com.apple.product-type.bundle";
+		};
+		DA3E6CA9160FAA05000FEA6C /* ClassMapperBenchmark */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA3E6CDC160FAA05000FEA6C /* Build configuration list for PBXNativeTarget "ClassMapperBenchmark" */;
+			buildPhases = (
+				DA3E6CA6160FAA05000FEA6C /* Sources */,
+				DA3E6CA7160FAA05000FEA6C /* Frameworks */,
+				DA3E6CA8160FAA05000FEA6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA3E6CE8160FAB8D000FEA6C /* PBXTargetDependency */,
+			);
+			name = ClassMapperBenchmark;
+			productName = ClassMapperBenchmark;
+			productReference = DA3E6CAA160FAA05000FEA6C /* ClassMapperBenchmark.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -341,6 +468,7 @@
 			targets = (
 				848C2431148BE9CA001859C8 /* ClassMapper */,
 				848C2441148BE9CA001859C8 /* ClassMapperTests */,
+				DA3E6CA9160FAA05000FEA6C /* ClassMapperBenchmark */,
 			);
 		};
 /* End PBXProject section */
@@ -351,6 +479,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				848C2450148BE9CA001859C8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA3E6CA8160FAA05000FEA6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA3E6CB5160FAA05000FEA6C /* InfoPlist.strings in Resources */,
+				DA3E6CBD160FAA05000FEA6C /* Default.png in Resources */,
+				DA3E6CBF160FAA05000FEA6C /* Default@2x.png in Resources */,
+				DA3E6CC1160FAA05000FEA6C /* Default-568h@2x.png in Resources */,
+				DA3E6CC4160FAA05000FEA6C /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +509,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		EFA77AEA86CA419694C2AB82 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-test-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -404,6 +558,20 @@
 				DA927F3D14E36F6900FD3401 /* DateHolder.m in Sources */,
 				533146B61529F62B00B260B0 /* BarSubClass.m in Sources */,
 				538AEFC2157002E200B28636 /* PrimitiveHolder.m in Sources */,
+				DA3E6CA5160F8DC0000FEA6C /* ClassMapperDispatchSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA3E6CA6160FAA05000FEA6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA3E6CB7160FAA05000FEA6C /* main.m in Sources */,
+				DA3E6CBB160FAA05000FEA6C /* AppDelegate.m in Sources */,
+				DA3E6CC7160FAA05000FEA6C /* ViewController.m in Sources */,
+				DA3E6CE6160FAB6B000FEA6C /* BigScalarArrayBenchmark.m in Sources */,
+				DA3E6CEC160FB17D000FEA6C /* BigObjectArrayBenchmark.m in Sources */,
+				DA3E6CEF160FBB62000FEA6C /* BigNestedObjectArrayBenchmark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +583,11 @@
 			target = 848C2431148BE9CA001859C8 /* ClassMapper */;
 			targetProxy = 848C2448148BE9CA001859C8 /* PBXContainerItemProxy */;
 		};
+		DA3E6CE8160FAB8D000FEA6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 848C2431148BE9CA001859C8 /* ClassMapper */;
+			targetProxy = DA3E6CE7160FAB8D000FEA6C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -424,6 +597,22 @@
 				848C244F148BE9CA001859C8 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA3E6CB3160FAA05000FEA6C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA3E6CB4160FAA05000FEA6C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA3E6CC2160FAA05000FEA6C /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA3E6CC3160FAA05000FEA6C /* en */,
+			);
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -478,7 +667,6 @@
 				DSTROOT = /tmp/ClassMapper.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ClassMapper/ClassMapper-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -491,7 +679,6 @@
 				DSTROOT = /tmp/ClassMapper.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ClassMapper/ClassMapper-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -499,10 +686,11 @@
 		};
 		848C245A148BE9CA001859C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3B36F1DFB9747C3AA1DD078 /* Pods-test.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ClassMapper/ClassMapper-Prefix.pch";
@@ -515,10 +703,11 @@
 		};
 		848C245B148BE9CA001859C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3B36F1DFB9747C3AA1DD078 /* Pods-test.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ClassMapper/ClassMapper-Prefix.pch";
@@ -526,6 +715,57 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		DA3E6CDD160FAA05000FEA6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ClassMapperBenchmark/ClassMapperBenchmark-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "ClassMapperBenchmark/ClassMapperBenchmark-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DA3E6CDE160FAA05000FEA6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ClassMapperBenchmark/ClassMapperBenchmark-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "ClassMapperBenchmark/ClassMapperBenchmark-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -558,6 +798,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DA3E6CDC160FAA05000FEA6C /* Build configuration list for PBXNativeTarget "ClassMapperBenchmark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA3E6CDD160FAA05000FEA6C /* Debug */,
+				DA3E6CDE160FAA05000FEA6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

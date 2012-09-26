@@ -20,6 +20,28 @@
 #import <objc/runtime.h>
 
 @implementation ClassMapper
++ (dispatch_queue_t)dispatchQueue
+{
+    static dispatch_queue_t class_mapper_queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        /* This is a concurrent queue, so multiple calls to async methods will swarm. */
+        class_mapper_queue = dispatch_queue_create("com.pashields.classmapper.concurrent", DISPATCH_QUEUE_CONCURRENT);
+    });
+    return class_mapper_queue;
+}
+
++ (dispatch_queue_t)serialQueue
+{
+    static dispatch_queue_t class_mapper_queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        /* This is a concurrent queue, so multiple calls to async methods will swarm. */
+        class_mapper_queue = dispatch_queue_create("com.pashields.classmapper.serial", 0);
+    });
+    return class_mapper_queue;
+}
+
 #pragma mark deserialize
 + (id)deserialize:(id)serialized toInstance:(id)instance {
     /* We can't turn null into anything else, so just return it */
@@ -55,5 +77,30 @@
 #pragma mark serialize
 + (id)serialize:(id<Serializable>)object {
     return [object _cm_serialize];
+}
+
+#pragma mark async ops
++ (void)deserializeAsync:(id<Mappable>)serialized toClass:(Class)classType completion:(void (^)(id))completionBlock
+{
+    dispatch_async([self dispatchQueue], ^{
+        @autoreleasepool {
+            id deserialized = [ClassMapper deserialize:serialized toClass:classType];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(deserialized);
+            });
+        }
+    });
+}
+
++ (void)serializeAsync:(id<Serializable>)obj completion:(void (^)(id))completionBlock
+{
+    dispatch_async([self dispatchQueue], ^{
+        @autoreleasepool {
+            id serialized = [ClassMapper serialize:obj];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(serialized);
+            });
+        }
+    });
 }
 @end

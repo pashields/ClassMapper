@@ -42,15 +42,20 @@
             instanceClass = [[self objectForKey:[[self allKeys] lastObject]] class];
         }
         [self removeAllObjects];
-        for (NSString *key in serialized) {
-            id cereal = [serialized objectForKey:key];
-            class = FIRST_NOT_NULL([[MapperConfig sharedInstance] classFromKey:key], 
-                                   instanceClass, [cereal class], nil);
-            
-            /* Pass the buck up to main classmapper to handle arrays */
-            id obj = [ClassMapper deserialize:cereal toClass:class];
-            [self setValue:obj forKey:key];
-        }
+        
+        CM_SAFE_WRITE_SETUP(queue)
+        
+        NSEnumerationOptions options = RUN_CONCURRENT ? NSEnumerationConcurrent : 0;
+        [serialized enumerateKeysAndObjectsWithOptions:options
+                                            usingBlock:^(id key, id obj, BOOL *stop) {
+                                                Class class = FIRST_NOT_NULL([[MapperConfig sharedInstance] classFromKey:key],
+                                                                             instanceClass, [obj class], nil);
+                                                
+                                                /* Pass the buck up to main classmapper to handle arrays */
+                                                id dObj = [ClassMapper deserialize:obj toClass:class];
+                                                CM_SAFE_WRITE(queue, [self setValue:dObj forKey:key];)
+                                            }];
+        CM_SAFE_WRITE_TEARDOWN(queue)
     }
     return self;
 }

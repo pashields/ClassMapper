@@ -15,3 +15,5 @@ profile
 *.moved-aside
 *~
 docset-installed.txt
+Podfile.lock
+Pods/

@@ -33,16 +33,27 @@
         instanceClass = [[self lastObject] class];
     }
     [self removeAllObjects];
-    for (id cereal in serialized) {
-        /* Generally, we want to chain class types. If someone has clearly specified
-           the type of the container, however, we want to break the chain. */
-        if ([class isSubclassOfClass:[NSArray class]]) {
-            class = nil;
-        }
-        class = FIRST_NOT_NULL(instanceClass, class, [cereal class], nil);
-        [self addObject:[ClassMapper deserialize:cereal toClass:class]];
+    for (int i=0; i<[serialized count]; i++) {
+        [self addObject:[NSNull null]];
     }
     
+    CM_SAFE_WRITE_SETUP(queue)
+    
+    NSEnumerationOptions options = RUN_CONCURRENT ? NSEnumerationConcurrent : 0;
+    [serialized enumerateObjectsWithOptions:options
+                                 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                     /* Generally, we want to chain class types. If someone has clearly specified
+                                      the type of the container, however, we want to break the chain. */
+                                     Class objClass = class;
+                                     if ([objClass isSubclassOfClass:[NSArray class]]) {
+                                         objClass = nil;
+                                     }
+                                     objClass = FIRST_NOT_NULL(instanceClass, objClass, [obj class], nil);
+                                     id deserialized = [ClassMapper deserialize:obj toClass:objClass];
+                                     CM_SAFE_WRITE(queue, [self replaceObjectAtIndex:idx withObject:deserialized];)
+                                 }];
+    CM_SAFE_WRITE_TEARDOWN(queue)
+
     return self;
 }
 @end

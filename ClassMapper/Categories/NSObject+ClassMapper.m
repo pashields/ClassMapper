@@ -72,45 +72,47 @@
     /* All property keys for the instance */
     NSArray *classKeys = [propToAttr allKeys];
     
-    /* key is strong so we can swap it if need be */
-    for (__strong NSString *key in serialized) {
-        /* The value */
-        id val = [serialized objectForKey:key];
-        /* Update the key according to config, might swap */
-        key = [[MapperConfig sharedInstance] _trueKey:key];
-
-        /* Check if key is in source object only */
-        if (![classKeys containsObject:key]) {
-            if (LOG_KEY_MISSING) {
-                NSLog(@"Property %@ does not exist in class %@, but is found in source object %@",
-                      key, [self class], serialized);
-            }
-            continue;
-        }
-        
-        /* Get class specified by property */
-        Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:key] withKey:key];
-        /* Update val if we have a preproc block */
-        val = [[MapperConfig sharedInstance] preProcessProperty:val
-                                                        ofClass:propClass];
-        
-        /* Create the instance, by Mappable protocol if possible */
-        if (![self valueForKey:key]) {            
-            Class toClass = [NSObject classWithAttributeClass:propClass andAttrKey:key];
-            
-            if (toClass == nil) { // Property is id, do not recurse
-                [self setValue:val forKey:key];
-            } else {
-                [self setValue:[ClassMapper deserialize:val toClass:toClass]
-                        forKey:key];
-            }
-        } else {
-            /* Update existing instance */
-            id subInst = [self valueForKey:key];
-            [self setValue:[subInst _cm_update_with:val withClass:[[MapperConfig sharedInstance] classFromKey:key]] 
-                    forKey:key];
-        }
-    }
+    CM_SAFE_WRITE_SETUP(queue)
+    
+    NSEnumerationOptions options = RUN_CONCURRENT ? NSEnumerationConcurrent : 0;
+    [serialized enumerateKeysAndObjectsWithOptions:options
+                                        usingBlock:^(id preKey, id preVal, BOOL *stop) {
+                                            /* Update the key according to config, might swap */
+                                            NSString *key = [[MapperConfig sharedInstance] _trueKey:preKey];
+                                            
+                                            /* Check if key is in source object only */
+                                            if (![classKeys containsObject:key]) {
+                                                if (LOG_KEY_MISSING) {
+                                                    NSLog(@"Property %@ does not exist in class %@, but is found in source object %@",
+                                                          key, [self class], serialized);
+                                                }
+                                                return;
+                                            }
+                                            
+                                            /* Get class specified by property */
+                                            Class propClass = [NSObject classFromAttribute:[propToAttr objectForKey:key] withKey:key];
+                                            /* Update val if we have a preproc block */
+                                            id val = [[MapperConfig sharedInstance] preProcessProperty:preVal
+                                                                                               ofClass:propClass];
+                                            
+                                            /* Create the instance, by Mappable protocol if possible */
+                                            id obj;
+                                            if (![self valueForKey:key]) {
+                                                Class toClass = [NSObject classWithAttributeClass:propClass andAttrKey:key];
+                                                
+                                                if (toClass == nil) { // Property is id, do not recurse
+                                                    obj = val;
+                                                } else {
+                                                    obj = [ClassMapper deserialize:val toClass:toClass];
+                                                }
+                                            } else {
+                                                /* Update existing instance */
+                                                id subInst = [self valueForKey:key];
+                                                obj = [subInst _cm_update_with:val withClass:[[MapperConfig sharedInstance] classFromKey:key]];
+                                            }
+                                            CM_SAFE_WRITE(queue, [self setValue:obj forKey:key];)
+                                        }];
+    CM_SAFE_WRITE_TEARDOWN(queue);
     
     return self;
 }
@@ -120,7 +122,7 @@
 + (Class)classFromAttribute:(NSString *)attr withKey:(NSString *)key {
     if ([attr hasPrefix:@"T@,"]) {
         if (LOG_ID_OBJ) {
-            NSLog(@"Warning: Property %@ appears to be of type id", key);
+            NSLog(@"Warning: Property %@ appears to be of type id, it will not be deserialized", key);
         }
         return nil;
     } else if (![attr hasPrefix:@"T@\""]) {
