@@ -73,6 +73,17 @@
 + (id)deserialize:(id<Mappable>)serialized toClass:(Class)classType;
 
 /**
+ Creates a new instance of a class and populates it with the data from the serialized object asynchronously.
+ 
+ In general, this is a shorthand for creating a new instance and then deserializing it using the above. In the case the serialized data is an array, this will create a new NSArray instance populated with objects of class classType.
+ 
+ @param serialized A serialized representation of the object.
+ @param classType The class of the destination object.
+ @param completionBlock A block that will be called (on the main thread) with the deserialized object.
+ */
++ (void)deserializeAsync:(id<Mappable>)serialized toClass:(Class)classType completion:(void(^)(id deserialized))completionBlock;
+
+/**
  Converts an object to a JSON-compatible dictionary.
  
  Requires the object to implement the serializable protocol, or be KVC compliant.
@@ -83,6 +94,13 @@
  */
 + (id)serialize:(id<Serializable>)obj;
 
-+ (void)deserializeAsync:(id<Mappable>)serialized toClass:(Class)classType completion:(void(^)(id deserialized))completionBlock;
+/**
+ Converts an object to a JSON-compatible dictionary asynchronously.
+ 
+ Requires the object to implement the serializable protocol, or be KVC compliant.
+ 
+ @param obj The object to be deserialized.
+ @param completionBlock A block that will be called (on the main thread) with the serialized representation of the object.
+ */
 + (void)serializeAsync:(id<Serializable>)obj completion:(void(^)(id serialized))completionBlock;
 @end
