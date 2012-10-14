@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name     = 'ClassMapper'
-  s.version  = '0.0.1'
+  s.version  = '0.0.2'
   s.license  = 'BSD'
   s.summary  = 'A simple obj-c library for converting classes which follow Key-Value Coding (KVC) conventions to other objects.'
   s.author   = { 'Pat Shields' => 'yeoldefortran@gmail.com' }
   s.homepage = 'https://github.com/pashields/ClassMapper'
 
-  s.source   = { :git => 'git://github.com/pashields/ClassMapper.git', :tag => 'v0.0.1' }
+  s.source   = { :git => 'https://github.com/pashields/ClassMapper.git', :tag => 'v0.0.2' }
 
   s.platform = :ios
 
