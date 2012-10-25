@@ -36,7 +36,6 @@
     static dispatch_queue_t class_mapper_queue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        /* This is a concurrent queue, so multiple calls to async methods will swarm. */
         class_mapper_queue = dispatch_queue_create("com.pashields.classmapper.serial", 0);
     });
     return class_mapper_queue;
