@@ -18,13 +18,7 @@
 #import <Foundation/NSObjCRuntime.h>
 #import <objc/runtime.h>
 
-@interface MapperConfig () {
-    NSMutableDictionary *classMappings_;
-    NSMutableDictionary *propNameMappings_;
-    NSMutableDictionary *preProcBlockMappings_;
-    NSMutableDictionary *postProcBlockMappings_;
-    BOOL includeNullValues_;
-}
+@interface MapperConfig ()
 @property(nonatomic, strong)NSMutableDictionary *mutableClassMappings;
 @property(nonatomic, strong)NSMutableDictionary *mutablePropNameMappings;
 @property(nonatomic, strong)NSMutableDictionary *preProcBlockMappings;
@@ -32,12 +26,6 @@
 @end
 
 @implementation MapperConfig
-@synthesize includeNullValues=includeNullValues_;
-@synthesize mutableClassMappings=classMappings_;
-@synthesize mutablePropNameMappings=propNameMappings_;
-@synthesize preProcBlockMappings=preProcBlockMappings_;
-@synthesize postProcBlockMappings=postProcBlockMappings_;
-
 #pragma mark singleton
 + (MapperConfig *)sharedInstance {
     static MapperConfig *instance = NULL;
